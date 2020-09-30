@@ -11,8 +11,8 @@ db.once('open', function() {
 });
 
 const productSchema = new mongoose.Schema({
-    product_id: String,
-    style_id: String,
+    id_product: String,
+    id_style: String,
     size_male: Number,
     size_female: Number,
     quantity: Number
@@ -24,19 +24,19 @@ const Product = mongoose.model('Product', productSchema);
 
 let updateDb = (data) => {
     let newProduct = new Product({
-        product_id: data.product_id,
-        style_id: data.style_id,
+        id_product: data.product_id,
+        id_style: data.style_id,
         size_male: data.size_male,
         size_female: data.size_female,
         quantity: data.quantity
     });
 
     return new Promise((res, rej) => {
-        Product.update({product_id: data.product_id}, newProduct, {upsert: true}, (err, data) => {
+        db.collection('Products').insertOne(newProduct, (err, result) => {
             if (err) {
                 rej(err);
             } else {
-                res(data);
+                res(result);
             }
         }); 
     });
