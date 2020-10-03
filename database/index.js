@@ -7,14 +7,13 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 db.once('open', function() {
-  console.log('okay 🥺');
+  console.log('Connected to the database!');
 });
 
 const productSchema = new mongoose.Schema({
-    id_product: String,
-    id_style: String,
-    size_male: Number,
-    size_female: Number,
+    product_id: Number,
+    style_id: Number,
+    size: Number,
     quantity: Number
 });
 
@@ -22,14 +21,15 @@ const productSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', productSchema);
 
 
-let updateDb = (data) => {
+let addToDb = (data) => {
+
     let newProduct = new Product({
-        id_product: data.product_id,
-        id_style: data.style_id,
-        size_male: data.size_male,
-        size_female: data.size_female,
+        product_id: data.product_id,
+        style_id: data.style_id,
+        size: data.size,
         quantity: data.quantity
-    });
+    });;
+
 
     return new Promise((res, rej) => {
         db.collection('Products').insertOne(newProduct, (err, result) => {
@@ -43,5 +43,22 @@ let updateDb = (data) => {
     
 };
 
+let findStyle = (productId, styleId) => {
+    let productInt = parseInt(productId);
+    let styleInt = parseInt(styleId);
 
-module.exports.updateDb = updateDb;
+    return new Promise((res, rej) => {
+        db.collection('Products').find({product_id: productInt, style_id: styleInt}, (err, result) => {
+            if (err) {
+                rej(err);
+            } else {
+                res(result.toArray());
+            }
+        });
+    });
+    
+};
+
+
+module.exports.addToDb = addToDb;
+module.exports.findStyle = findStyle;
