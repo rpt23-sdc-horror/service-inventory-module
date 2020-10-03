@@ -62,3 +62,4 @@ let findStyle = (productId, styleId) => {
 
 module.exports.addToDb = addToDb;
 module.exports.findStyle = findStyle;
+module.exports.db = db;
