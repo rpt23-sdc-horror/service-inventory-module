@@ -20,19 +20,28 @@ let addSizesToDB = (productId, styleId) => {
 };
 
 let setInventoryQuantity = (productQuantity, styleQuantity, cb) => {
+    let promiseArr = [];
     
     for (let currentProduct = 0; currentProduct < productQuantity; currentProduct++) {
     
         for (let currentStyle = 0; currentStyle < styleQuantity; currentStyle++) {
-            cb(currentProduct, currentStyle);
+            
+            Promise.all(cb(currentProduct, currentStyle))
+            .then((result) => {
+                promiseArr.push(result);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
             
             if (currentProduct == productQuantity-1 && currentStyle == styleQuantity-1) {
-                setTimeout(() => {process.kill(process.pid)}, 10000);
+                setTimeout(() => {process.kill(process.pid)}, 5000);
             }
         }
 
     }
 
+    return promiseArr;
 };
 
 module.exports.addSizesToDB = addSizesToDB;

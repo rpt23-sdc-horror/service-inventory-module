@@ -13,7 +13,7 @@ app.get('/inventory/:productid/:styleid', (req, res) => {
     inventoryDB.findStyle(req.params.productid, req.params.styleid)
     .then((result) => {
         console.log(result);
-        res.send(result);
+        res.send(result).status(200);
     })
     .catch((err) => {
         console.log(err);

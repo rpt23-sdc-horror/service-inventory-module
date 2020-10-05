@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 //inventory is the database
-mongoose.connect('mongodb://localhost/inventory', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/inventory',  {poolSize: 10, bufferMaxEntries: 0, reconnectTries: 5000, useNewUrlParser: true,useUnifiedTopology: true});
 
 var db = mongoose.connection;
 
@@ -22,23 +22,26 @@ const Product = mongoose.model('Product', productSchema);
 
 
 let addToDb = (data) => {
+    let productInt = parseInt(data.product_id);
+    let styleInt = parseInt(data.style_id);
 
     let newProduct = new Product({
-        product_id: data.product_id,
-        style_id: data.style_id,
+        product_id: productInt,
+        style_id: styleInt,
         size: data.size,
         quantity: data.quantity
     });;
 
 
     return new Promise((res, rej) => {
-        db.collection('Products').insertOne(newProduct, (err, result) => {
-            if (err) {
-                rej(err);
-            } else {
-                res(result);
-            }
-        }); 
+        
+        db.collection('Products').insertOne(newProduct)
+        .then((result) => {
+            res(result);
+        }) 
+        .catch((err) => {
+            rej(err);
+        });
     });
     
 };
