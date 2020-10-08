@@ -1,0 +1,7 @@
+#sizeTile {
+    border-radius: 25px;
+    border: 2px solid lightgray;
+    padding: 20px;
+    width: 10px;
+    height: 10px;
+}
