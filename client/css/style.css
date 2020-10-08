@@ -1,7 +1,22 @@
 #sizeTile {
-    border-radius: 25px;
-    border: 2px solid lightgray;
-    padding: 20px;
-    width: 10px;
-    height: 10px;
+    cursor: pointer;
+    font-family: Helvetica;
+    font-weight: 350;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: .5px solid lightgray;
+    height: 48px;
+    width: 58.391px;
+}
+
+#sizeTile:hover {
+    border-color: black;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 65px 65px 65px 65px 65px;
+    grid-template-rows: 55px 55px 55px 55px;
 }
