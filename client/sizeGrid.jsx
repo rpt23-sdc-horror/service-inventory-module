@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SizeTile from './components/sizeTile.jsx';
 import axios from 'axios';
+import $ from 'jquery';
 
 class SizeGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sizes: []
+      sizes: [],
+      currentSize: '',
+      currentTile: ''
     };
   }
 
@@ -27,7 +30,6 @@ class SizeGrid extends React.Component {
   getSizes () {
 
     return new Promise ((res, rej) => {
-
       axios.get('http://localhost:3004/inventory/98/1')
       .then((results) => {
         res(results.data);
@@ -38,6 +40,19 @@ class SizeGrid extends React.Component {
     })
   }
 
+  selectSize (selectedSize) {
+    let selected = document.getElementsByClassName(selectedSize)[0];
+
+    if (this.state.currentSize) {
+      this.state.currentTile.setAttribute('class', `sizeTile ${this.state.currentSize}`);
+    }
+
+    this.setState({currentSize: selectedSize, currentTile: selected}, () => {
+      selected.setAttribute('class', `selected ${selectedSize}`);
+    });
+
+  }
+
   render() {
     
     return (
@@ -45,7 +60,7 @@ class SizeGrid extends React.Component {
         <label id="selectSize" className="inventoryHeader">Select Size</label>
         <label id="sizeGuide" className="inventoryHeader">Size Guide</label>
         <div className="grid">
-            {this.state.sizes.map(ele => <SizeTile sizes={ele}/>)}
+            {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
         </div>
       </div>
     );

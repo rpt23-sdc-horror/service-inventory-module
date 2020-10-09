@@ -11,6 +11,19 @@
     width: 58.391px;
 }
 
+.selected {
+    cursor: pointer;
+    font-family: Helvetica;
+    font-weight: 350;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: .5px solid black;
+    height: 48px;
+    width: 58.391px;
+}
+
 .sizeTile:hover {
     border-color: black;
 }
@@ -44,6 +57,7 @@
 
 #quantity0 {
     cursor: default;
+    pointer-events: none;
     color: lightgray;
     background-color: rgb(241, 241, 241);
     border-color: lightgray;
