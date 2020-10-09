@@ -16,7 +16,28 @@
 }
 
 .grid {
+    width: fit-content;
     display: grid;
     grid-template-columns: 65px 65px 65px 65px 65px;
     grid-template-rows: 55px 55px 55px 55px;
+}
+
+#selectSize {
+    justify-content: left;
+}
+
+#sizeGuide {
+    color: gray;
+    float: right;
+    padding-bottom: 10px;
+    padding-right: 6px;
+}
+
+#inventory {
+    float: right;
+    width: fit-content;
+}
+
+.inventoryHeader {
+    font-family: Helvetica;
 }

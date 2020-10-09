@@ -41,8 +41,12 @@ class SizeGrid extends React.Component {
   render() {
     
     return (
-      <div className="grid">
-          {this.state.sizes.map(ele => <SizeTile sizes={ele}/>)}
+      <div id="inventory">
+        <label id="selectSize" className="inventoryHeader">Select Size</label>
+        <label id="sizeGuide" className="inventoryHeader">Size Guide</label>
+        <div className="grid">
+            {this.state.sizes.map(ele => <SizeTile sizes={ele}/>)}
+        </div>
       </div>
     );
   }
