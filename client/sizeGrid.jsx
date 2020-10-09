@@ -28,7 +28,7 @@ class SizeGrid extends React.Component {
 
     return new Promise ((res, rej) => {
 
-      axios.get('http://localhost:3004/inventory/98/2')
+      axios.get('http://localhost:3004/inventory/98/1')
       .then((results) => {
         res(results.data);
       })

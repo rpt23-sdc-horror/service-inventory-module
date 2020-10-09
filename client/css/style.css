@@ -1,4 +1,4 @@
-#sizeTile {
+.sizeTile {
     cursor: pointer;
     font-family: Helvetica;
     font-weight: 350;
@@ -11,7 +11,7 @@
     width: 58.391px;
 }
 
-#sizeTile:hover {
+.sizeTile:hover {
     border-color: black;
 }
 
@@ -40,4 +40,11 @@
 
 .inventoryHeader {
     font-family: Helvetica;
+}
+
+#quantity0 {
+    cursor: default;
+    color: lightgray;
+    background-color: rgb(241, 241, 241);
+    border-color: lightgray;
 }
