@@ -36,6 +36,7 @@
 }
 
 #selectSize {
+    font-weight: 525;
     justify-content: left;
 }
 
@@ -64,7 +65,7 @@
 }
 
 #fewLeft {
-    color: rgb(168, 129, 0);
+    color: rgb(192, 147, 0);
     font-weight: 450;
     font-family: Helvetica;
     padding-bottom: 25px;
