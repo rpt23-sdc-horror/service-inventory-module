@@ -20,11 +20,10 @@ class SizeGrid extends React.Component {
     this.getSizes()
     .then((results) => {
       this.setState({sizes: results});  
-      console.log(this.state.sizes);
     })
     .catch((err) => {
-      console.log('ERROR FETCHING STATE: ', err);
-    })
+      throw(err);
+    });
   }
 
   getSizes () {
@@ -41,16 +40,37 @@ class SizeGrid extends React.Component {
   }
 
   selectSize (selectedSize) {
-    let selected = document.getElementsByClassName(selectedSize)[0];
+    const selected = document.getElementsByClassName(selectedSize)[0];
 
     if (this.state.currentSize) {
       this.state.currentTile.setAttribute('class', `sizeTile ${this.state.currentSize}`);
     }
-
+    
     this.setState({currentSize: selectedSize, currentTile: selected}, () => {
       selected.setAttribute('class', `selected ${selectedSize}`);
+
+      if (this.hasFewLeft(this.getQuantity(this.state.currentTile))) {
+        if ($('#fewLeft').length == 0) {
+          $('#inventory').prepend('<div id="fewLeft">Just a few left. Order soon.</div>');
+        }
+      } else {
+        $('#fewLeft').remove();
+      }
     });
 
+  }
+
+  hasFewLeft (quantity) {
+    let selectedQuantity = parseInt(quantity);
+
+    if (selectedQuantity <= 2) {
+      return true;
+    } 
+    return false;
+  }
+
+  getQuantity (selectedTile) {
+    return selectedTile.id.slice(8);
   }
 
   render() {
@@ -67,5 +87,5 @@ class SizeGrid extends React.Component {
   }
 }
 
-let domContainer = document.querySelector('#app');
+const domContainer = document.querySelector('#app');
 ReactDOM.render(<SizeGrid />, domContainer);

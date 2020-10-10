@@ -62,3 +62,11 @@
     background-color: rgb(241, 241, 241);
     border-color: lightgray;
 }
+
+#fewLeft {
+    color: rgb(168, 129, 0);
+    font-weight: 450;
+    font-family: Helvetica;
+    padding-bottom: 25px;
+    padding-left: 40px;
+}
