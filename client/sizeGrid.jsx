@@ -82,6 +82,13 @@ class SizeGrid extends React.Component {
         <div className="grid">
             {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
         </div>
+        <button className="inventory-button add-to-cart">Add to Bag</button>
+        <button className="inventory-button favorite">Favorite  ♡</button>
+        
+        <div className="shipping-text">Shipping</div>
+        <div className="shipping-date">Arrives by Sun, Nov 1
+          <div className="edit-location">Edit Location</div>
+        </div>
       </div>
     );
   }
