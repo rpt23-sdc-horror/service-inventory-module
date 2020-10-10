@@ -4,6 +4,7 @@ const inventoryDB = require('../database');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/../public/dist'));
 app.use(function(req, res, next){
      res.set({
         'Access-Control-Allow-Origin': '*',
