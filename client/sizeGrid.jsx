@@ -15,9 +15,11 @@ class SizeGrid extends React.Component {
   }
 
   componentDidMount () {
-    //get state from anabell's service
-    //pass in product_id & style_id from that into getSize()
-    this.getSizes()
+    const ids = window.location.pathname.split('/');
+    const productId = ids[1];
+    const styleId = ids[2];
+  
+    this.getSizes(productId, styleId)
     .then((results) => {
       this.setState({sizes: results});  
     })
@@ -26,10 +28,10 @@ class SizeGrid extends React.Component {
     });
   }
 
-  getSizes () {
+  getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get('http://localhost:3004/inventory/98/1')
+      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
       .then((results) => {
         res(results.data);
       })
@@ -94,5 +96,5 @@ class SizeGrid extends React.Component {
   }
 }
 
-const domContainer = document.querySelector('#app');
+const domContainer = document.querySelector('#inventory-module');
 ReactDOM.render(<SizeGrid />, domContainer);
