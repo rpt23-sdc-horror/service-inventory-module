@@ -31,7 +31,7 @@ class SizeGrid extends React.Component {
   getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
+      axios.get(`http://localhost:3004/inventory/054/001`)
       .then((results) => {
         res(results.data);
       })
@@ -75,6 +75,26 @@ class SizeGrid extends React.Component {
     return selectedTile.id.slice(8);
   }
 
+  addToBag () {
+    if (this.checkIfSizeSelected()) {
+      console.log('a size is selected');
+      $('.grid').css('border', '');
+      $('.inventory-text').css('display', 'none');
+    } else {
+      $('.grid').css('border', '.5px solid');
+      $('.grid').css('border-color', 'red');
+      $('.inventory-text').css('display', 'contents');
+    }
+  }
+
+  checkIfSizeSelected () {
+    if ($('.selected').length == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   render() {
     
     return (
@@ -84,7 +104,8 @@ class SizeGrid extends React.Component {
         <div className="grid">
             {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
         </div>
-        <button className="inventory-button add-to-cart">Add to Bag</button>
+        <div class="inventory-text">Please select a size.</div>
+        <button className="inventory-button add-to-cart" onClick={this.addToBag.bind(this)}>Add to Bag</button>
         <button className="inventory-button favorite">Favorite  ♡</button>
         
         <div className="shipping-text">Shipping</div>
