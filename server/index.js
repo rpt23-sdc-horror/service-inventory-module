@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const inventoryDB = require('../database');
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/../public/dist'));
 app.use(function(req, res, next){
      res.set({
         'Access-Control-Allow-Origin': '*',
@@ -12,11 +9,13 @@ app.use(function(req, res, next){
      })
      next();
 });
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/../public/dist'));
 
 app.listen(3004, () => {
     console.log('Listening on port 3004');
 });
-
 
 app.get('/inventory/:productid/:styleid', (req, res) => {
     inventoryDB.findStyle(req.params.productid, req.params.styleid)
