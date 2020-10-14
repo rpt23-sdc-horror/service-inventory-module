@@ -31,7 +31,7 @@ class SizeGrid extends React.Component {
   getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get(`http://localhost:3004/inventory/054/001`)
+      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
       .then((results) => {
         res(results.data);
       })
@@ -104,7 +104,7 @@ class SizeGrid extends React.Component {
         <div className="grid">
             {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
         </div>
-        <div class="inventory-text">Please select a size.</div>
+        <div className="inventory-text">Please select a size.</div>
         <button className="inventory-button add-to-cart" onClick={this.addToBag.bind(this)}>Add to Bag</button>
         <button className="inventory-button favorite">Favorite  ♡</button>
         
