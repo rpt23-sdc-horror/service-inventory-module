@@ -17,8 +17,8 @@ class SizeGrid extends React.Component {
 
   componentDidMount () {
     const ids = window.location.pathname.split('/');
-    const productId = ids[1];
-    const styleId = ids[2];
+    const productId = ids[2];
+    const styleId = ids[3];
   
     this.getSizes(productId, styleId)
     .then((results) => {
