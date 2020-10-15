@@ -29,7 +29,11 @@
 }
 
 .grid {
+    border-radius: 5px;
+    border-color: red;
+    border-spacing: 0px;
     width: fit-content;
+    height: fit-content;
     display: grid;
     grid-template-columns: 65px 65px 65px 65px 65px;
     grid-template-rows: 55px 55px 55px 55px;
@@ -48,6 +52,9 @@
 }
 
 #inventory {
+    padding-top: 50px;
+    padding-right: 100px;
+    padding-bottom: 100px;
     float: right;
     width: fit-content;
 }
@@ -122,4 +129,11 @@ button:focus {
     font-weight: 350;
     padding-left: 5px;
     text-decoration: underline;
+}
+
+.inventory-text {
+    display: none;
+    font-family: Helvetica;
+    font-weight: 330;
+    color: red;
 }
