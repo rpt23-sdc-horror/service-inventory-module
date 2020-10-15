@@ -29,14 +29,18 @@
 }
 
 .grid {
-    border-radius: 5px;
-    border-color: red;
-    border-spacing: 0px;
     width: fit-content;
     height: fit-content;
     display: grid;
     grid-template-columns: 65px 65px 65px 65px 65px;
     grid-template-rows: 55px 55px 55px 55px;
+}
+
+.grid-selected {
+    border-radius: 5px;
+    border-spacing: 0px;
+    border: .5px solid;
+    border-color: red;
 }
 
 #selectSize {
@@ -132,7 +136,6 @@ button:focus {
 }
 
 .inventory-text {
-    display: none;
     font-family: Helvetica;
     font-weight: 330;
     color: red;

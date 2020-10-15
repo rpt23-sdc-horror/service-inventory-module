@@ -10,7 +10,8 @@ class SizeGrid extends React.Component {
     this.state = {
       sizes: [],
       currentSize: '',
-      currentTile: ''
+      currentTile: '',
+      noSizeSelected: false
     };
   }
 
@@ -31,7 +32,7 @@ class SizeGrid extends React.Component {
   getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
+      axios.get(`http://localhost:3004/inventory/0/1`)
       .then((results) => {
         res(results.data);
       })
@@ -42,6 +43,7 @@ class SizeGrid extends React.Component {
   }
 
   selectSize (selectedSize) {
+
     const selected = document.getElementsByClassName(selectedSize)[0];
 
     if (this.state.currentSize) {
@@ -76,35 +78,32 @@ class SizeGrid extends React.Component {
   }
 
   addToBag () {
-    if (this.checkIfSizeSelected()) {
-      console.log('a size is selected');
-      $('.grid').css('border', '');
-      $('.inventory-text').css('display', 'none');
+    if (!this.state.currentSize) {
+      this.setState({noSizeSelected: true});
     } else {
-      $('.grid').css('border', '.5px solid');
-      $('.grid').css('border-color', 'red');
-      $('.inventory-text').css('display', 'contents');
-    }
-  }
-
-  checkIfSizeSelected () {
-    if ($('.selected').length == 0) {
-      return false;
-    } else {
-      return true;
+      this.setState({noSizeSelected: false});
     }
   }
 
   render() {
-    
+    let gridClass;
+    let selectASize;
+
+    if (!this.state.currentSize && this.state.noSizeSelected) {
+      gridClass = 'grid grid-selected';
+      selectASize = (<div className="inventory-text">Please select a size.</div>);
+    } else {
+      gridClass = 'grid';
+    }
+
     return (
       <div id="inventory">
         <label id="selectSize" className="inventoryHeader">Select Size</label>
         <label id="sizeGuide" className="inventoryHeader">Size Guide</label>
-        <div className="grid">
+        <div className={gridClass}>
             {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
         </div>
-        <div className="inventory-text">Please select a size.</div>
+        {selectASize}
         <button className="inventory-button add-to-cart" onClick={this.addToBag.bind(this)}>Add to Bag</button>
         <button className="inventory-button favorite">Favorite  ♡</button>
         
@@ -113,7 +112,8 @@ class SizeGrid extends React.Component {
           <div className="edit-location">Edit Location</div>
         </div>
       </div>
-    );
+    );   
+    
   }
 }
 
