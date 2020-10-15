@@ -32,7 +32,7 @@ class SizeGrid extends React.Component {
   getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get(`http://localhost:3004/inventory/0/1`)
+      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
       .then((results) => {
         res(results.data);
       })
