@@ -32,7 +32,7 @@ class SizeGrid extends React.Component {
   getSizes (productId, styleId) {
 
     return new Promise ((res, rej) => {
-      axios.get(`http://localhost:3004/inventory/${productId}/${styleId}`)
+      axios.get(`http://localhost:3004/inventory/0/1`)
       .then((results) => {
         res(results.data);
       })
@@ -85,29 +85,32 @@ class SizeGrid extends React.Component {
 
   render() {
     let gridClass;
-    let selectASize;
-    let orderSoon;
+    let selectASizeClass;
+    let orderSoonClass;
 
     if (!this.state.currentSize && this.state.didNotSelectSize) {
       gridClass = 'grid grid-selected';
-      selectASize = (<div className="inventory-text">Please select a size.</div>);
+      selectASizeClass = 'inventory-text';
     } else {
       gridClass = 'grid';
+      selectASizeClass = 'hidden';
     }
 
     if (this.state.fewSizesLeft) {
-      orderSoon = (<div className="fewLeft">Just a few left. Order soon.</div>);
+      orderSoonClass = 'fewLeft';
+    } else {
+      orderSoonClass = 'hidden';
     }
 
     return (
         <div id="inventory">
-          {orderSoon}
+          <div className={orderSoonClass}>Just a few left. Order soon.</div>
           <label id="selectSize" className="inventoryHeader">Select Size</label>
           <label id="sizeGuide" className="inventoryHeader">Size Guide</label>
           <div className={gridClass}>
               {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
           </div>
-          {selectASize}
+          <div className={selectASizeClass}>Please select a size.</div>
           <button className="inventory-button add-to-cart" onClick={this.addToBag.bind(this)}>Add to Bag</button>
           <button className="inventory-button favorite">Favorite  ♡</button>
           <div className="shipping-text">Shipping</div>
