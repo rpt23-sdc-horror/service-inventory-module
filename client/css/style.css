@@ -75,7 +75,7 @@
     border-color: lightgray;
 }
 
-#fewLeft {
+.fewLeft {
     color: rgb(192, 147, 0);
     font-weight: 450;
     font-family: Helvetica;
@@ -139,4 +139,8 @@ button:focus {
     font-family: Helvetica;
     font-weight: 330;
     color: red;
+}
+
+.hidden {
+    display: none;
 }
