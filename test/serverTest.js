@@ -19,12 +19,12 @@ describe ('server', () => {
     it ('should receive an array of styles as response', (done) => {
         let productQuantity = 1;
         let styleQuantity = 1;
-        //a mens shoe style should have 17 sizes
-        let expected = 17;
+        //a womens shoe style should have 15 sizes
+        let expected = 15;
 
         Promise.all(seeder.setInventoryQuantity(productQuantity, styleQuantity, seeder.addSizesToDB))
         .then(() => {
-            axios.get('http://localhost:3004/inventory/000/000')
+            axios.get('http://localhost:3004/inventory/001/001')
             .then((res) => {
                 assert.equal(res.data.length, expected);
                 database.db.collection('Products').deleteMany({})
