@@ -6,10 +6,10 @@ describe ('seeder', () => {
 
     describe ('setInventoryQuantity', () => {
         it ('should populate database with the given product & style quantities', (done) => {
-            let productQuantity = 2;
-            let styleQuantity = 2;
+            let productQuantity = 1;
+            let styleQuantity = 1;
             //34 documents for mens, 30 documents for womens
-            let expected = 64;
+            let expected = 15;
             
     
             Promise.all(seeder.setInventoryQuantity(productQuantity, styleQuantity, seeder.addSizesToDB))
