@@ -7,8 +7,6 @@
     align-items: center;
     border-radius: 5px;
     border: .5px solid lightgray;
-    height: 48px;
-    width: 58.391px;
 }
 
 .selected {
@@ -20,8 +18,6 @@
     align-items: center;
     border-radius: 5px;
     border: .5px solid black;
-    height: 48px;
-    width: 58.391px;
 }
 
 .sizeTile:hover {
@@ -32,15 +28,19 @@
     width: fit-content;
     height: fit-content;
     display: grid;
+    grid-gap: 5px;
     grid-template-columns: 65px 65px 65px 65px 65px;
     grid-template-rows: 55px 55px 55px 55px;
 }
 
+.error-text {
+    color: #d43f21;
+}
+
 .grid-selected {
     border-radius: 5px;
-    border-spacing: 0px;
     border: .5px solid;
-    border-color: red;
+    border-color: #d43f21;
 }
 
 #selectSize {
@@ -76,11 +76,18 @@
 }
 
 .fewLeft {
-    color: rgb(192, 147, 0);
+    color: rgb(186, 134, 30);
     font-weight: 450;
     font-family: Helvetica;
+    width: fit-content;
     padding-bottom: 25px;
-    padding-left: 40px;
+    margin: 5px;
+}
+
+#order-soon-text {
+    padding-left: 20px;
+    vertical-align: top;
+    line-height: 1.5;
 }
 
 .inventory-button {
@@ -136,9 +143,10 @@ button:focus {
 }
 
 .inventory-text {
+    padding: 15px 0px 10px 10px;
     font-family: Helvetica;
     font-weight: 330;
-    color: red;
+    color: #d43f21;
 }
 
 .hidden {
