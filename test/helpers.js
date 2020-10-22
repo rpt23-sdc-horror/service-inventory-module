@@ -4,8 +4,11 @@ const render = require('enzyme').render;
 const shallow = require('enzyme').shallow;
 const configure = require('enzyme').configure;
 const Adapter = require('enzyme-adapter-react-16');
+require = require('esm')(module);
 
 configure({ adapter: new Adapter() });
+
+module.exports = require('./sizeGridTest.js');
 
 global.expect = expect;
 
