@@ -1,4 +1,5 @@
+import { shallow } from 'enzyme';
 import React from 'react';
-import SizeTile from '../client/components/sizeTile.jsx';
+import { assert } from 'chai';
 
-console.log('here')
+
