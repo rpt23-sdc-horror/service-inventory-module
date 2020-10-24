@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const inventoryDB = require('../database');
+const port = process.env.PORT || 3004;
 
 app.use(function(req, res, next){
      res.set({
@@ -13,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../public/dist'));
 
-app.listen(3004, () => {
+app.listen(port, () => {
     console.log('Listening on port 3004');
 });
 
