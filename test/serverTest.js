@@ -26,13 +26,16 @@ describe ('server', () => {
         .then(() => {
             axios.get('http://localhost:3004/inventory/001/001')
             .then((res) => {
-                assert.equal(res.data.length, expected);
-                database.db.collection('Products').deleteMany({})
-                .then(() => {
-                    done();
-                })
-                .catch((err) => {
-                    console.log('ERROR DELETING FROM DATABASE: ', err);
+                axios.get('http://localhost:3004/inventory/001/001')
+                .then((res) => {
+                    assert.equal(res.data.length, expected);
+                    database.db.collection('Products').deleteMany({})
+                    .then(() => {
+                        done();
+                    })
+                    .catch((err) => {
+                        console.log('ERROR DELETING FROM DATABASE: ', err);
+                    });
                 });
             })
             .catch((err) => {
