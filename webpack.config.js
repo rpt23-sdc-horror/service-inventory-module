@@ -2,7 +2,7 @@ const path = require('path');
 const buildDirectory = './public/dist';
 
 module.exports = {
-    entry: './client/sizeGrid.jsx',
+    entry: './client/app.jsx',
     externals: {
       'cheerio': 'window',
       'react/lib/ExecutionEnvironment': true,

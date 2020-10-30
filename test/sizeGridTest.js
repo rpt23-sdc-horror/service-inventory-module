@@ -20,5 +20,5 @@ describe ('<SizeGrid />', () => {
             console.log(res);
             done();
         })
-    })
+    });
 });
