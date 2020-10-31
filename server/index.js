@@ -13,6 +13,7 @@ app.use(function(req, res, next){
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../public/dist'));
+app.use('/shop/:productId/:styleId', express.static(__dirname + './../public/dist'));
 
 app.listen(port, () => {
     console.log('Listening on port 3004');
