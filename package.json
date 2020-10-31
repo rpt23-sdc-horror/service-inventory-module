@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "test": "mocha  --require esm --require ignore-styles --require @babel/register ./test|| true",
+    "test": "mocha --require ./test/dom.js --require esm --require ignore-styles --require @babel/register ./test|| true",
     "seed": "node ./seed/index.js",
     "react-dev": "webpack -d --watch"
   },
