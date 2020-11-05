@@ -8,9 +8,6 @@ require = require('esm')(module);
 
 configure({ adapter: new Adapter() });
 
-// module.exports = require('./sizeGridTest.js');
-// module.exports = require('./sizeTileTest.js');
-
 global.expect = expect;
 
 global.mount = mount;

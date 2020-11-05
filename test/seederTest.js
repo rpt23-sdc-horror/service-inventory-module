@@ -21,7 +21,6 @@ describe ('seeder', () => {
                         results.toArray()
                         .then((res) => {
                             assert.equal(res.length, expected);
-                            //console.log(res);
                         })
                         .catch((err) => {
                             console.log('NEW ERROR: ', err);
