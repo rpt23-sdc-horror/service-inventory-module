@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import SizeTile from './components/sizeTile.jsx';
 import axios from 'axios';
 const port = process.env.PORT || 3004;
