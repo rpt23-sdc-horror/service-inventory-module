@@ -1,7 +1,12 @@
 const path = require('path');
+const buildDirectory = './public/dist';
+
 module.exports = {
-    entry: {
-        bundle: path.join(__dirname, './client/sizeGrid.jsx')
+    entry: './client/app.jsx',
+    externals: {
+      'cheerio': 'window',
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': true,
     },
     module: {
       rules: [
@@ -22,7 +27,7 @@ module.exports = {
       ]
     },
      output: {
-      filename: '[name].js',
+      filename: 'bundle.js',
       path: __dirname + '/public/dist'
     }
   };

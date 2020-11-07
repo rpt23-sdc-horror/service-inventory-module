@@ -129,5 +129,4 @@ class SizeGrid extends React.Component {
   }
 }
 
-const domContainer = document.querySelector('#inventory-module');
-ReactDOM.render(<SizeGrid />, domContainer);
+export default SizeGrid;

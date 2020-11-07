@@ -8,8 +8,8 @@ describe ('database', () => {
     
     it ('should be able to write to the database', (done) => {
         let obj = {
-            product_id: 099,
-            style_id: 003,
+            product_id: 99,
+            style_id: 3,
             size: 8,
             quantity: 2
         };
@@ -36,9 +36,9 @@ describe ('database', () => {
 
     it ('should be able to find a specific style', (done) => {
 
-        database.findStyle(099, 003)
+        database.findStyle(99, 3)
         .then((result) => {
-            assert.equal(result[0].product_id, 099);
+            assert.equal(result[0].product_id, 99);
             database.db.collection('Products').deleteMany({product_id: 99})
             .then(() => {
                 done();

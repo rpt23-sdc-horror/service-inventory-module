@@ -22,6 +22,9 @@ describe ('seeder', () => {
                         .then((res) => {
                             assert.equal(res.length, expected);
                         })
+                        .catch((err) => {
+                            console.log('NEW ERROR: ', err);
+                        });
                     }
                 });
                 database.db.collection('Products').deleteMany({})
