@@ -14,9 +14,7 @@ class SizeGrid extends React.Component {
       didNotSelectSize: false,
       fewSizesLeft: false
     };
-  }
 
-  componentDidMount () {
     const ids = window.location.pathname.split('/');
     const productId = ids[2];
     const styleId = ids[3];
