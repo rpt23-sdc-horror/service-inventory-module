@@ -14,9 +14,7 @@ class SizeGrid extends React.Component {
       didNotSelectSize: false,
       fewSizesLeft: false
     };
-  }
 
-  componentDidMount () {
     const ids = window.location.pathname.split('/');
     const productId = ids[2];
     const styleId = ids[3];
@@ -114,7 +112,7 @@ class SizeGrid extends React.Component {
           <label id="selectSize" className={"inventoryHeader " + selectTextClass}>Select Size</label>
           <label id="sizeGuide" className="inventoryHeader">Size Guide</label>
           <div className={gridClass}>
-              {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)}/>)}
+              {this.state.sizes.map(ele => <SizeTile sizes={ele} clickFunc={this.selectSize.bind(this)} key={ele.size}/>)}
           </div>
           <div className={selectASizeClass} id="selectSize">Please select a size.</div>
           <button className="inventory-button add-to-cart" onClick={this.addToBag.bind(this)}>Add to Bag</button>
