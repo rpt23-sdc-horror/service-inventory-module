@@ -6,18 +6,6 @@ import SizeGrid from '../client/sizeGrid.jsx';
 import SizeTile from '../client/components/sizeTile.jsx';
 
 describe ('<SizeGrid />', () => {
-    describe ('componentDidMount', () => {
-        it ('should be invoked after component mounts', () => {
-            sinon.spy(SizeGrid.prototype, 'componentDidMount');
-            const wrapper = mount (<SizeGrid />);
-
-            expect(SizeGrid.prototype.componentDidMount).to.have.property('callCount', 1);
-        });
-
-        it ('should call getSizes', () => {
-            expect(SizeGrid.prototype.componentDidMount).to.have.property('callCount');
-        });
-    });
 
     describe ('getSizes', () => {
         it ('should receive an array as a response', (done) => {
