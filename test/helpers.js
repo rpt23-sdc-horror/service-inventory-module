@@ -1,15 +1,11 @@
-const expect = require('chai');
-const mount = require('enzyme').mount;
-const render = require('enzyme').render;
-const shallow = require('enzyme').shallow;
-const configure = require('enzyme').configure;
-const Adapter = require('enzyme-adapter-react-16');
-require = require('esm')(module);
-
-configure({ adapter: new Adapter() });
+const expect = require("chai");
+const mount = require("enzyme").mount;
+const render = require("enzyme").render;
+const shallow = require("enzyme").shallow;
+require = require("esm")(module);
 
 global.expect = expect;
 
 global.mount = mount;
 global.render = render;
-global.shallow = shallow; 
+global.shallow = shallow;
