@@ -16,7 +16,14 @@ describe("Server Routes Tests", function () {
     it("should return a 200 OK status", function (done) {
       sinon.stub(database, "findStyle").callsFake(async function () {
         const object = {
-          rows: [{ product_id: 1, style_id: 2, size: 12.5, quantity: 10 }],
+          rows: [
+            {
+              product_id: 1,
+              style_id: 2,
+              size: 12.5,
+              quantity: 10,
+            },
+          ],
         };
         const result = JSON.stringify(object);
 
