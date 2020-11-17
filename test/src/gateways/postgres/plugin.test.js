@@ -115,7 +115,7 @@ describe("Gateway Plugin Test", function () {
       sinon.restore();
     });
 
-    it("should the quantity of the product", async function () {
+    it("should update the quantity of the desired product", async function () {
       sinon.stub(pg.Client.prototype, "query").callsFake(async function () {
         const object = {
           rows: [
