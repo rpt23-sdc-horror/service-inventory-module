@@ -5,6 +5,7 @@ describe("Gateway Tests", function () {
   class ThinGateway extends Gateway {}
   const gateway = new ThinGateway();
   const sandbox = sinon.createSandbox();
+
   before(function () {
     sinon.restore();
     sandbox.spy(gateway);
