@@ -37,8 +37,8 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      // Use winston to record errors.
-      await this.logger.log("error", err.message, err);
+      // Use winston to record errors. "Error:" will log "Error: [error message]"
+      await this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -64,7 +64,7 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      await this.logger.log("error", err.message, err);
+      await this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -81,8 +81,7 @@ export default class PostgresGateway extends Gateway {
     try {
       await client.query("BEGIN");
 
-      const queryText =
-        `UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id, size`;
+      const queryText = `UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id, size`;
       const response = await client.query(queryText, [
         quantity,
         pID,
@@ -92,7 +91,7 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      await this.logger.log("error", err.message, err);
+      await this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -111,15 +110,11 @@ export default class PostgresGateway extends Gateway {
 
       const queryText =
         "DELETE FROM products WHERE product_id = $1 AND style_id = $2 AND size = $3 RETURNING product_id, style_id";
-      const response = await client.query(queryText, [
-        pID,
-        sID,
-        size,
-      ]);
+      const response = await client.query(queryText, [pID, sID, size]);
 
       return response;
     } catch (err) {
-      await this.logger.log("error", err.message, err);
+      await this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;

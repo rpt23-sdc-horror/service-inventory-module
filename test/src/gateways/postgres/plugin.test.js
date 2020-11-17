@@ -24,16 +24,15 @@ describe("Gateway Plugin Test", function () {
 
     it("should write to the database and return the respective product id", async function () {
       sinon.stub(pg.Client.prototype, "query").callsFake(async function () {
-        const object = {
+        const result = {
           rows: [
             {
               product_id: "1",
             },
           ],
         };
-        const result = JSON.stringify(object);
 
-        return JSON.parse(result);
+        return result;
       });
 
       const response = await db.write(product);
@@ -70,16 +69,15 @@ describe("Gateway Plugin Test", function () {
 
     it("should read from database with the given parameters", async function () {
       sinon.stub(pg.Client.prototype, "query").callsFake(async function () {
-        const object = {
+        const result = {
           rows: [
             {
               product_id: "1",
             },
           ],
         };
-        const result = JSON.stringify(object);
 
-        return JSON.parse(result);
+        return result;
       });
 
       const response = await db.read(productID, styleID);
@@ -117,7 +115,7 @@ describe("Gateway Plugin Test", function () {
 
     it("should update the quantity of the desired product", async function () {
       sinon.stub(pg.Client.prototype, "query").callsFake(async function () {
-        const object = {
+        const result = {
           rows: [
             {
               product_id: "1",
@@ -126,9 +124,8 @@ describe("Gateway Plugin Test", function () {
             },
           ],
         };
-        const result = JSON.stringify(object);
 
-        return JSON.parse(result);
+        return result;
       });
 
       const response = await db.updateQuantity(
@@ -173,7 +170,7 @@ describe("Gateway Plugin Test", function () {
 
     it("should delete a product from the database", async function () {
       sinon.stub(pg.Client.prototype, "query").callsFake(async function () {
-        const object = {
+        const result = {
           rows: [
             {
               product_id: "1",
@@ -181,9 +178,8 @@ describe("Gateway Plugin Test", function () {
             },
           ],
         };
-        const result = JSON.stringify(object);
 
-        return JSON.parse(result);
+        return result;
       });
 
       const response = await db.delete(productID, styleID, size);
