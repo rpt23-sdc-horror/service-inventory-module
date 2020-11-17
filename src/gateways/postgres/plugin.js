@@ -109,7 +109,7 @@ export default class PostgresGateway extends Gateway {
       await client.query("BEGIN");
 
       const queryText =
-        "DELETE FROM products WHERE product_id = $1 AND style_id = $2 AND size = $3 RETURNING product_id, style_id";
+        "DELETE FROM products WHERE product_id = $1 AND style_id = $2 AND size = $3 RETURNING product_id, style_id, size";
       const response = await client.query(queryText, [pID, sID, size]);
 
       return response;
