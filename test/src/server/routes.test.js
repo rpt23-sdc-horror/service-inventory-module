@@ -1,7 +1,7 @@
-const app = require("../../../src/server/routes");
-const request = require("supertest");
-const sinon = require("sinon");
-const database = require("../../../src/gateways/mongodb/index");
+import app from "../../../src/server/routes";
+import request from "supertest";
+import sinon from "sinon";
+import database from "../../../src/gateways/mongodb/index";
 
 describe("Server Routes", function () {
   describe("Get Endpoint", function () {

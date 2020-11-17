@@ -1,5 +1,5 @@
-const app = require("../../../src/server/index");
-const request = require("supertest");
+import app from "../../../src/server/index";
+import request from "supertest";
 
 describe("Server", function () {
   it("should return a 200 OK status when the correct endpoints are reached", function (done) {
