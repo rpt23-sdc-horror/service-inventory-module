@@ -122,6 +122,7 @@ describe("Gateway Plugin Test", function () {
             {
               product_id: "1",
               style_id: "1",
+              size: 13.5,
             },
           ],
         };
@@ -139,6 +140,7 @@ describe("Gateway Plugin Test", function () {
 
       expect(Number(response.rows[0].product_id)).to.equal(1);
       expect(Number(response.rows[0].style_id)).to.equal(1);
+      expect(response.rows[0].size).to.equal(13.5);
     });
 
     it("should throw an error if the query fails", async function () {
@@ -184,11 +186,7 @@ describe("Gateway Plugin Test", function () {
         return JSON.parse(result);
       });
 
-      const response = await db.delete(
-        productID,
-        styleID,
-        size,
-      );
+      const response = await db.delete(productID, styleID, size);
 
       expect(Number(response.rows[0].product_id)).to.equal(1);
       expect(Number(response.rows[0].style_id)).to.equal(1);

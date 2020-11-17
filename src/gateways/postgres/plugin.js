@@ -82,7 +82,7 @@ export default class PostgresGateway extends Gateway {
       await client.query("BEGIN");
 
       const queryText =
-        `UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id`;
+        `UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id, size`;
       const response = await client.query(queryText, [
         quantity,
         pID,
