@@ -1,9 +1,9 @@
-const app = require("../../../src/server/routes");
-const request = require("supertest");
-const sinon = require("sinon");
-const database = require("../../../src/gateways/mongodb/index");
+import app from "../../../src/server/routes";
+import request from "supertest";
+import sinon from "sinon";
+import database from "../../../src/gateways/mongodb/index";
 
-describe("Server Routes", function () {
+describe("Server Routes Tests", function () {
   describe("Get Endpoint", function () {
     beforeEach(function () {
       sinon.restore();
@@ -16,7 +16,14 @@ describe("Server Routes", function () {
     it("should return a 200 OK status", function (done) {
       sinon.stub(database, "findStyle").callsFake(async function () {
         const object = {
-          rows: [{ product_id: 1, style_id: 2, size: 12.5, quantity: 10 }],
+          rows: [
+            {
+              product_id: 1,
+              style_id: 2,
+              size: 12.5,
+              quantity: 10,
+            },
+          ],
         };
         const result = JSON.stringify(object);
 
