@@ -1,4 +1,4 @@
-import Gateway from "../../../src/gateways/gateway";
+import Gateway from "../../../src/gateways/index";
 import sinon from "sinon";
 
 describe("Gateway Tests", function () {

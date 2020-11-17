@@ -8,17 +8,6 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({adapter: new Adapter()});
 
 describe("<SizeGrid />", () => {
-  describe("getSizes", () => {
-    it("should receive an array as a response", (done) => {
-      sinon.spy(SizeGrid.prototype, "getSizes");
-      const wrapper = mount(<SizeGrid />);
-      SizeGrid.prototype.getSizes(1, 1).then((res) => {
-        expect(res).to.be.an("array");
-        done();
-      });
-    });
-  });
-
   describe("selectSize", () => {
     it("should change the state of currentSize & currentTile", () => {
       const wrapper = mount(<SizeGrid />, {

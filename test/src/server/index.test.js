@@ -1,7 +1,7 @@
 import app from "../../../src/server/index";
 import request from "supertest";
 
-describe("Server", function () {
+describe("Server Tests", function () {
   it("should return a 200 OK status when the correct endpoints are reached", function (done) {
     request(app)
       .get(`/inventory/${1}/${2}`)

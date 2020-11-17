@@ -3,7 +3,7 @@ import request from "supertest";
 import sinon from "sinon";
 import database from "../../../src/gateways/mongodb/index";
 
-describe("Server Routes", function () {
+describe("Server Routes Tests", function () {
   describe("Get Endpoint", function () {
     beforeEach(function () {
       sinon.restore();
