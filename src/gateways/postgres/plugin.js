@@ -17,18 +17,18 @@ export default class PostgresGateway extends Gateway {
     });
   }
 
-  async write(datum) {
+  async write(document) {
     const client = await this.pool.connect();
 
     try {
       await client.query("BEGIN");
 
-      const { product_id, style_id, size, quantity } = datum;
+      const { product_id, style_id, size, quantity } = document;
       const queryText =
         "INSERT INTO products (product_id, style_id, size, quantity) VALUES ($1, $2, $3, $4) RETURNING product_id";
       const response = await client.query(queryText, [
-        JSON.stringify(`${product_id}`),
-        JSON.stringify(`${style_id}`),
+        `${product_id}`,
+        `${style_id}`,
         size,
         quantity,
       ]);
@@ -50,8 +50,8 @@ export default class PostgresGateway extends Gateway {
   async read(productID, styleID) {
     // Since the product ID and style ID are stored as strings, they must be stringified before they can be used as query parameters.
     const client = await this.pool.connect();
-    const pID = JSON.stringify(`${productID}`);
-    const sID = JSON.stringify(`${styleID}`);
+    const pID = `${productID}`;
+    const sID = `${styleID}`;
 
     try {
       await client.query("BEGIN");
@@ -73,17 +73,17 @@ export default class PostgresGateway extends Gateway {
     }
   }
 
-  async updateQuantity(productID, styleID, size, quantity) {
+  async updateQuantity(productID, styleID, size, newQuantity) {
     const client = await this.pool.connect();
-    const pID = JSON.stringify(`${productID}`);
-    const sID = JSON.stringify(`${styleID}`);
+    const pID = `${productID}`;
+    const sID = `${styleID}`;
 
     try {
       await client.query("BEGIN");
 
-      const queryText = `UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id, size`;
+      const queryText = "UPDATE products SET quantity = $1 WHERE product_id = $2 AND style_id = $3 AND size = $4 RETURNING product_id, style_id, size";
       const response = await client.query(queryText, [
-        quantity,
+        newQuantity,
         pID,
         sID,
         size,
@@ -102,8 +102,8 @@ export default class PostgresGateway extends Gateway {
 
   async delete(productID, styleID, size) {
     const client = await this.pool.connect();
-    const pID = JSON.stringify(`${productID}`);
-    const sID = JSON.stringify(`${styleID}`);
+    const pID = `${productID}`;
+    const sID = `${styleID}`;
 
     try {
       await client.query("BEGIN");
