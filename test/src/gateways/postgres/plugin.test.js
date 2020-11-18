@@ -1,10 +1,11 @@
 import pg from "pg";
-import PostgresGateway from "../../../../src/gateways/postgres/plugin";
+import PostgresGateway from "../../../../src/gateways/postgres/index";
 import sinon from "sinon";
 import { expect } from "chai";
 
 describe("Gateway Plugin Test", function () {
   const db = new PostgresGateway();
+  const error = new Error("Fake Error");
 
   describe("Write Action", function () {
     const product = {
@@ -40,8 +41,7 @@ describe("Gateway Plugin Test", function () {
       expect(Number(response.rows[0].product_id)).to.equal(1);
     });
 
-    it("should throw an error if the query fails", async function () {
-      const error = new Error("Fake Error");
+    it("should throw an error if the query fails and log it with Winston", async function () {
       const logger = sinon.spy(db.logger, "log");
 
       try {
@@ -84,8 +84,7 @@ describe("Gateway Plugin Test", function () {
       expect(Number(response.rows[0].product_id)).to.equal(1);
     });
 
-    it("should throw an error if the query fails", async function () {
-      const error = new Error("Fake Error");
+    it("should throw an error if the query fails and log it with Winston", async function () {
       const logger = sinon.spy(db.logger, "log");
 
       try {
@@ -140,8 +139,7 @@ describe("Gateway Plugin Test", function () {
       expect(response.rows[0].size).to.equal(13.5);
     });
 
-    it("should throw an error if the query fails", async function () {
-      const error = new Error("Fake Error");
+    it("should throw an error if the query fails and log it with Winston", async function () {
       const logger = sinon.spy(db.logger, "log");
 
       try {
@@ -190,8 +188,7 @@ describe("Gateway Plugin Test", function () {
       expect(response.rows[0].size).to.equal(13.5);
     });
 
-    it("should throw an error if the query fails", async function () {
-      const error = new Error("Fake Error");
+    it("should throw an error if the query fails and log it with Winston", async function () {
       const logger = sinon.spy(db.logger, "log");
 
       try {
