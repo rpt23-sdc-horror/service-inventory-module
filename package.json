@@ -8,7 +8,6 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "server-dev": "babel-node -x \".js\" src/server/index.js",
     "start": "babel-node -x \".js\" src/server/index.js",
     "test": "mocha test/**/*.test.js --require ./test/dom.js --require esm --require ignore-styles --require @babel/register ./test --exit || true",
     "seed": "node ./seed/index.js",
@@ -32,7 +31,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/node": "^7.12.6",
-    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.12.1",
