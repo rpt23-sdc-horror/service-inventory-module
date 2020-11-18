@@ -1,5 +1,6 @@
-const express = require("express");
-const inventoryDB = require("../gateways/mongodb/index");
+import express, { json } from "express";
+import Controller from "../controller/index";
+import cors from "cors";
 
 const app = express();
 
@@ -14,20 +15,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/dist"));
 app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+app.use(
   "/shop/:productId/:styleId",
   express.static(__dirname + "./../client/dist")
 );
 
 app.get("/inventory/:productid/:styleid", (req, res) => {
-  inventoryDB
-    .findStyle(req.params.productid, req.params.styleid)
-    .then((result) => {
-      res.send(result).status(200);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+
+  // inventoryDB
+  //   .findStyle(req.params.productid, req.params.styleid)
+  //   .then((result) => {
+  //     res.send(result).status(200);
+  //   })
+  //   .catch((err) => {
+  //     ThinGateway.logger.log("error", "Error:", err);
+  //     console.log("Error: ", err);
+  //     res.sendStatus(500);
+  //   });
 });
 
-module.exports = app;
+export default app;

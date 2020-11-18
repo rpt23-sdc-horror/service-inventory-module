@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Controller from "../../../src/controllers/index";
+import Controller from "../../../src/controller/index";
 import PostgresGateway from "../../../src/gateways/postgres/index";
 import sinon from "sinon";
 
