@@ -139,7 +139,12 @@ describe("Controller Tests", function () {
           return result;
         });
 
-      const response = await controller.updateQuantity(productID, styleID, size, newQuantity);
+      const response = await controller.updateQuantity(
+        productID,
+        styleID,
+        size,
+        newQuantity
+      );
 
       expect(Number(response.rows[0].product_id)).to.equal(1);
       expect(Number(response.rows[0].style_id)).to.equal(1);
