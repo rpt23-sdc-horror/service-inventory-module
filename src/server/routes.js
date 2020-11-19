@@ -6,30 +6,43 @@ const app = express();
 
 const controller = new Controller();
 
-app.use(function (req, res, next) {
-  res.set({
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
-  });
-  next();
-});
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../client/dist"));
 app.use(
   cors({
     origin: "*",
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/../client/dist"));
 
 app.use(
   "/shop/:productId/:styleId",
   express.static(__dirname + "./../client/dist")
 );
 
+app.get("/inventory/product", (req, res) => {
+  res.sendStatus(405);
+  return;
+});
+
 app.get("/inventory/:productID/:styleID", function (req, res) {
   const pID = req.params.productID;
   const sID = req.params.styleID;
+
+  /*
+  To prevent bad requests, such as null in lieu of an actual product ID,
+  this endpoint is set to recognize null and undefined as params, and reject them.
+  */
+
+  if (
+    pID == "null" ||
+    sID == "null" ||
+    pID == "undefined" ||
+    sID == "undefined"
+  ) {
+    res.sendStatus(400);
+    return;
+  }
 
   controller
     .read(pID, sID)
@@ -42,8 +55,18 @@ app.get("/inventory/:productID/:styleID", function (req, res) {
     });
 });
 
-app.post("/inventory/product/add", function (req, res) {
+app.post("/inventory/product", function (req, res) {
   const document = req.body;
+
+  if (
+    !document.product_id ||
+    !document.style_id ||
+    !document.size ||
+    !document.quantity
+  ) {
+    res.sendStatus(400);
+    return;
+  }
 
   controller
     .write(document)
@@ -56,14 +79,16 @@ app.post("/inventory/product/add", function (req, res) {
     });
 });
 
-app.patch("/inventory/:productID/:styleID/update", function (req, res) {
+app.patch("/inventory/product", function (req, res) {
+  const pID = req.body.product_id;
+  const sID = req.body.style_id;
   const size = req.body.size;
   const newQuantity = req.body.newQuantity;
-  const pID = req.params.productID;
-  const sID = req.params.styleID;
 
-  // Development use only console.log.
-  console.log(req.body);
+  if (!pID || !sID || !size || !newQuantity) {
+    res.sendStatus(400);
+    return;
+  }
 
   controller
     .updateQuantity(pID, sID, size, newQuantity)
@@ -76,10 +101,15 @@ app.patch("/inventory/:productID/:styleID/update", function (req, res) {
     });
 });
 
-app.delete("/inventory/:productID/:styleID/:size/delete", function (req, res) {
-  const pID = req.params.productID;
-  const sID = req.params.styleID;
-  const size = req.params.size;
+app.delete("/inventory/product", function (req, res) {
+  const pID = req.body.product_id;
+  const sID = req.body.style_id;
+  const size = req.body.size;
+
+  if (!pID || !sID || !size) {
+    res.sendStatus(400);
+    return;
+  }
 
   controller
     .delete(pID, sID, size)
