@@ -1,5 +1,5 @@
 const assert = require("chai").assert;
-const sizes = require("../../../../seed/generateSizes");
+const sizes = require("../../../../seeder/mongoDB_seeder/generateSizes");
 
 describe("generate size function", () => {
   describe("output", () => {
