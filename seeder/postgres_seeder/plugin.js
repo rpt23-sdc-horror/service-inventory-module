@@ -17,9 +17,11 @@ export default class Seeder {
 
     for (let i = 0; i < documents.length; i++) {
       this.controller.write(documents[i]).catch(function (err) {
-        return console.error(`Seeder Error: ${err}`);
+        return console.error(`Error: ${err}`);
       });
     }
+
+    return "Status: Alive";
   }
 
   async generateData() {

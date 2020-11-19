@@ -3,21 +3,27 @@
 import Seeder from "./plugin";
 import config from "./seeder.config";
 
-(async function () {
+async function script() {
   const seeder = new Seeder(config);
 
   try {
     seeder.seed();
   } catch (err) {
-    console.error(`Seeder Error: ${err}`);
+    console.error(`Script Error: ${err}`);
+
+    // Throw error to prevent further execution.
+    throw err;
   } finally {
-    console.log(`Seeder has successfully finished its task!`);
+    console.log("Seeder has successfully finished its task!");
+    console.log("Ending task, this may take a few seconds.");
+    return "Status: Finished";
   }
-  // seeder
-  //   .seed()
-  //   .catch(function (err) {
-  //     console.error(`Seeder Error: ${err}`);
-  //   })
-  //   .finally(function (err) {
-  //   });
-})();
+}
+
+script().catch(function (err) {
+  console.error(`Seeder Error: ${err}`);
+
+  throw err;
+});
+
+export default script;
