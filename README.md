@@ -35,8 +35,8 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ### CRUD
 - Create: /inventory/product/add
 - Read: /inventory/:styleID/:productID/read
-- Update: /inventory/:productID/:styleID/update
-- Delete: /inventory/:productID/:styleID/delete
+- Update (Patch): /inventory/:productID/:styleID/update
+- Delete: /inventory/:productID/:styleID/:size/delete
 
 ### Installing Dependencies
 
