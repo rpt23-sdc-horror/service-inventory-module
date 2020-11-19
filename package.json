@@ -1,6 +1,6 @@
 {
   "name": "inventory-component",
-  "version": "",
+  "version": "1.0.0",
   "description": "This component is a service from the Front-End-Capstone project. The inventory component displays a size grid, and add to cart functions on the created webpage.",
   "author": "Nathanel Quiocson, Martin Sung",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "babel-node -x \".js\" src/server/index.js",
     "test": "mocha test/**/*.test.js --require ./test/dom.js --require esm --require ignore-styles --require @babel/register ./test --exit || true",
-    "seed": "node ./seed/index.js",
+    "seed-postgres": "babel-node -x \".js\" ./seeder/postgres_seeder/index.js",
     "react-dev": "webpack -d --watch",
     "build": "webpack --mode production"
   },
