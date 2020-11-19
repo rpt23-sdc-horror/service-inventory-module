@@ -143,14 +143,6 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return a 400 Bad Request if the request body is incorrect", function (done) {
-      sinon.stub(Controller.prototype, "write").callsFake(async function () {
-        const result = {
-          rows: [],
-        };
-
-        return result;
-      });
-
       request(app)
         .post("/inventory/product")
         .send(badDocument)
@@ -220,16 +212,6 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return a 400 Bad Request if the request body is incorrect", function (done) {
-      sinon
-        .stub(Controller.prototype, "updateQuantity")
-        .callsFake(async function () {
-          const result = {
-            rows: [],
-          };
-
-          return result;
-        });
-
       request(app)
         .patch("/inventory/product")
         .send(incorrectBody)
@@ -297,14 +279,6 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return a 400 Bad Request if the request body is incorrect", function (done) {
-      sinon.stub(Controller.prototype, "delete").callsFake(async function () {
-        const result = {
-          rows: [],
-        };
-
-        return result;
-      });
-
       request(app)
         .delete("/inventory/product")
         .send(incorrectBody)
