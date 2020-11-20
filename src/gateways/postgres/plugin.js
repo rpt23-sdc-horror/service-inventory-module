@@ -108,7 +108,6 @@ export default class PostgresGateway extends Gateway {
     const pID = `${productID}`;
     const sID = `${styleID}`;
 
-
     try {
       await client.query("BEGIN");
 

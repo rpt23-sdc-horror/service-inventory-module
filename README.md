@@ -33,10 +33,10 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ## Development
 
 ### CRUD
-- Create: /inventory/product/add
-- Read: /inventory/:styleID/:productID/read
-- Update (Patch): /inventory/:productID/:styleID/update
-- Delete: /inventory/:productID/:styleID/:size/delete
+- Create: POST /inventory/product
+- Read: GET /inventory/:productID/:styleID
+- Update: PATCH /inventory/product
+- Delete: DELETE /inventory/product
 
 ### Installing Dependencies
 
@@ -46,4 +46,3 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
-
