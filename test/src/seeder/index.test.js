@@ -28,7 +28,7 @@ describe("Script Tests", function () {
     sinon.restore();
   });
 
-  it("should be able to seed the database", async function () {
+  it("should be able to seed the database", async function (done) {
     const quantityGenerator = sinon.spy(Seeder.prototype, "generateQuantity");
     const coinFlipper = sinon.spy(Seeder.prototype, "coinFlip");
 
@@ -40,6 +40,9 @@ describe("Script Tests", function () {
       })
       .catch(function (err) {
         console.error("Test Error: ", err);
+      })
+      .finally(function () {
+        done();
       });
   });
 });
