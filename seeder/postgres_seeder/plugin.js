@@ -75,57 +75,6 @@ export default class Seeder {
     return result;
   }
 
-  async generateProductID() {
-    const result = [];
-    const headers = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z",
-    ];
-    for (let i = 0; i < this.productRange; i++) {
-      const indexOne = Math.floor(Math.random() * headers.length);
-      const indexTwo = Math.floor(Math.random() * headers.length);
-      if (i <= 9) {
-        const id = `${headers[indexOne]}` + `${headers[indexTwo]}` + `00${i}`;
-
-        result.push(id);
-      } else if (i <= 99) {
-        const id = `${headers[indexOne]}` + `${headers[indexTwo]}` + `0${i}`;
-
-        result.push(id);
-      } else {
-        const id = `${headers[indexOne]}` + `${headers[indexTwo]}` + `${i}`;
-
-        result.push(id);
-      }
-    }
-
-    return result;
-  }
-
   async generateQuantity() {
     const quantity = Math.floor(Math.random() * Math.floor(100));
 
