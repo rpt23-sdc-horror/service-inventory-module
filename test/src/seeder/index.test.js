@@ -1,39 +1,45 @@
-// import sinon from "sinon";
-// import { expect } from "chai";
-// import script from "../../../seeder/postgres_seeder/index";
-// import Seeder from "../../../seeder/postgres_seeder/plugin";
+import sinon from "sinon";
+import { expect } from "chai";
+import script from "../../../seeder/postgres_seeder/index";
+import Seeder from "../../../seeder/postgres_seeder/plugin";
 
-// xdescribe("Seeder Script Tests", function () {
-//   before(function () {
-//     sinon.stub(Seeder.prototype, "generateData").callsFake(async function () {
-//       const document = [
-//         {
-//           product_id: 1,
-//           style_id: 1,
-//           size: 13.5,
-//           quantity: 10,
-//         },
-//       ];
+describe("Script Tests", function () {
+  before(function () {
+    sinon.restore();
+    sinon.stub(Seeder.prototype, "generateData").callsFake(async function () {
+      const document = [
+        {
+          product_id: 1,
+          style_id: 1,
+          size: 13.5,
+          quantity: 10,
+        },
+      ];
 
-//       return document;
-//     });
+      return document;
+    });
 
-//     sinon.stub(Seeder.prototype, "seed").callsFake(async function () {
-//       return "Status: Alive";
-//     });
-//   });
+    sinon.stub(Seeder.prototype, "seed").callsFake(async function () {
+      return "Status: Alive";
+    });
+  });
 
-//   after(function () {
-//     sinon.restore();
-//   });
+  after(function () {
+    sinon.restore();
+  });
 
-//   it("should be able to seed the database", async function () {
-//     script()
-//       .then(function (response) {
-//         expect(response).to.equal("Status: Finished");
-//       })
-//       .catch(function (err) {
-//         console.error("Test Error: ", err);
-//       });
-//   });
-// });
+  it("should be able to seed the database", async function () {
+    const quantityGenerator = sinon.spy(Seeder.prototype, "generateQuantity");
+    const coinFlipper = sinon.spy(Seeder.prototype, "coinFlip");
+
+    script()
+      .then(function (response) {
+        expect(response).to.equal("Status: Finished");
+        sinon.assert.calledOnce(quantityGenerator);
+        sinon.assert.calledOnce(coinFlipper);
+      })
+      .catch(function (err) {
+        console.error("Test Error: ", err);
+      });
+  });
+});
