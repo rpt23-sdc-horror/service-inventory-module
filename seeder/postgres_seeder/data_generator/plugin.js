@@ -14,38 +14,38 @@ export default class CSVGenerator {
   }
 
   async generateFile() {
-    const writer = csvWriter();
+    let ticker = 0;
+    let fileNumber = 1;
 
     // Let developers know this method is running
     console.log(status.in_progress);
 
-    writer.pipe(
-      fs.createWriteStream(
-        "./seeder/postgres_seeder/csv_script/seed_data/mockData1.csv",
-        { flags: "a" }
-      )
-    );
-
-    for (let i = 0; i <= this.productRange; i++) {
+    for (let i = 0; i < this.productRange; i++) {
+      const writer = csvWriter({ sendHeaders: false });
       // Use a coin flipper to decide whether the shoe is for men or women
       const flip = await this.coinFlip();
-      let sizes;
-      let fileNumber = 1;
-      let internalCounter = 0;
+      const sizes = flip === 1 ? this.womenSizes : this.menSizes;
 
-      if (flip === 1) {
-        sizes = this.womenSizes;
-      } else {
-        sizes = this.menSizes;
+      if (ticker >= 250000) {
+        fileNumber++;
+        ticker = 0;
+
+        console.log(fileNumber);
       }
 
+      writer.pipe(
+        fs.createWriteStream(
+          `./seeder/postgres_seeder/data_generator/seed_data/mockData${fileNumber}.csv`,
+          { flags: "a" }
+        )
+      );
+
       for (let j = 0; j < this.styleRange; j++) {
-        // For each style ID, generate one shoe for each size available to the gender
         for (let k = 0; k < sizes.length; k++) {
           const currentSize = sizes[k];
           const newQuantity = await this.generateQuantity();
-          const productID = short.generate();
-          const styleID = short.generate();
+          const productID = i + 1;
+          const styleID = j + 1;
           const document = {
             product_id: productID,
             style_id: styleID,
@@ -53,39 +53,24 @@ export default class CSVGenerator {
             quantity: newQuantity,
           };
 
+          // Check if stream is still writable, if not begin draining process and re-open stream
           if (!writer.write(document)) {
             try {
               await writer.once("drain", this.generateFile);
-              console.log("Status: Draining Pipe");
-              fileNumber++;
+              console.log("Draining pipe");
             } catch (err) {
               console.log(err);
 
               throw err;
-            } finally {
-              writer.write(document);
-
-              internalCounter++;
             }
-          } else if (internalCounter === 1000000) {
-            await writer.pipe(
-              fs.createWriteStream(
-                `./seeder/postgres_seeder/csv_script/seed_data/mockData${fileNumber}.csv`,
-                { flags: "a" }
-              )
-            );
-
-            writer.write(document);
-            internalCounter = 0;
-          } else {
-            writer.write(document);
-
-            internalCounter++;
           }
+
+          ticker++;
         }
       }
+      writer.once("drain", this.generateFile);
+      writer.end();
     }
-    writer.end();
     return status.success;
   }
 

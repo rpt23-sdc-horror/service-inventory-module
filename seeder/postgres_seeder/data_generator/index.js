@@ -1,5 +1,5 @@
 import CSVGenerator from "./plugin";
-import config from "./config";
+import config from "./config.js";
 import status from "./helper";
 
 const csvGen = new CSVGenerator(config);

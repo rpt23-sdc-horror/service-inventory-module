@@ -20,7 +20,7 @@ Configurable options:
 */
 
 const config = {
-  product_range: 143000,
+  product_range: 1,
   style_range: 5,
   women_sizes: [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
   men_sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14, 15],

@@ -20,7 +20,8 @@ class SizeGrid extends React.Component {
 
     this.getSizes(productId, styleId)
       .then((results) => {
-        this.setState({ sizes: results });
+        console.log(results.data);
+        this.setState({ sizes: results.data });
       })
       .catch((err) => {
         throw err;
@@ -32,7 +33,7 @@ class SizeGrid extends React.Component {
       axios
         .get(`http://localhost:${port}/inventory/${productId}/${styleId}`)
         .then((results) => {
-          res(results.data);
+          res(results);
         })
         .catch((err) => {
           rej(err);
