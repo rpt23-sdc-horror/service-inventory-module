@@ -22,30 +22,28 @@ export default class CSVGenerator {
 
     for (let i = 0; i < this.productRange; i++) {
       const writer = csvWriter({ sendHeaders: false });
-      // Use a coin flipper to decide whether the shoe is for men or women
-      const flip = await this.coinFlip();
-      const sizes = flip === 1 ? this.womenSizes : this.menSizes;
+      const sizes =
+        (await this.coinFlip()) === 1 ? this.womenSizes : this.menSizes;
 
-      if (ticker >= 250000) {
+      if (ticker >= 900000) {
         fileNumber++;
         ticker = 0;
 
         console.log(fileNumber);
       }
 
-      writer.pipe(
-        fs.createWriteStream(
-          `./seeder/postgres_seeder/data_generator/seed_data/mockData${fileNumber}.csv`,
-          { flags: "a" }
-        )
+      const stream = fs.createWriteStream(
+        `./seeder/postgres_seeder/data_generator/seed_data/mockData${fileNumber}.csv`
       );
+
+      writer.pipe(stream);
 
       for (let j = 0; j < this.styleRange; j++) {
         for (let k = 0; k < sizes.length; k++) {
           const currentSize = sizes[k];
           const newQuantity = await this.generateQuantity();
-          const productID = i + 1;
-          const styleID = j + 1;
+          const productID = short.generate();
+          const styleID = short.generate();
           const document = {
             product_id: productID,
             style_id: styleID,
@@ -53,23 +51,12 @@ export default class CSVGenerator {
             quantity: newQuantity,
           };
 
-          // Check if stream is still writable, if not begin draining process and re-open stream
-          if (!writer.write(document)) {
-            try {
-              await writer.once("drain", this.generateFile);
-              console.log("Draining pipe");
-            } catch (err) {
-              console.log(err);
-
-              throw err;
-            }
-          }
-
+          !writer.write(document) ? writer.once("drain", writer.write(document)) : null;
           ticker++;
         }
       }
-      writer.once("drain", this.generateFile);
       writer.end();
+      stream.end();
     }
     return status.success;
   }
