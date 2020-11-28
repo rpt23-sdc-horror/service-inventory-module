@@ -44,7 +44,7 @@ describe("Controller Tests", function () {
     });
 
     it("should throw an error if the method fails and log it with Winston", async function () {
-      const logger = sinon.spy(controller.gateway.logger, "log");
+      const logger = sinon.spy(controller.logger, "log");
 
       try {
         sinon.stub(PostgresGateway.prototype, "write").throws(error);
@@ -95,7 +95,7 @@ describe("Controller Tests", function () {
     });
 
     it("should throw an error if the method fails and log it with Winston", async function () {
-      const logger = sinon.spy(controller.gateway.logger, "log");
+      const logger = sinon.spy(controller.logger, "log");
 
       try {
         sinon.stub(PostgresGateway.prototype, "read").throws(error);
@@ -152,7 +152,7 @@ describe("Controller Tests", function () {
     });
 
     it("should throw an error if the method fails and log it with Winston", async function () {
-      const logger = sinon.spy(controller.gateway.logger, "log");
+      const logger = sinon.spy(controller.logger, "log");
 
       try {
         sinon.stub(PostgresGateway.prototype, "updateQuantity").throws(error);
@@ -203,7 +203,7 @@ describe("Controller Tests", function () {
     });
 
     it("should throw an error if the method fails and log it with Winston", async function () {
-      const logger = sinon.spy(controller.gateway.logger, "log");
+      const logger = sinon.spy(controller.logger, "log");
 
       try {
         sinon.stub(PostgresGateway.prototype, "delete").throws(error);

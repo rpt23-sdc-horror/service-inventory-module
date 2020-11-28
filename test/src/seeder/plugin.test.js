@@ -4,7 +4,7 @@ import CSVGenerator from "../../../seeder/postgres_seeder/data_generator/plugin"
 import csvWriter from "csv-write-stream";
 
 
-describe("CSV Generator Test", function () {
+xdescribe("CSV Generator Test", function () {
   const fakeConfig = {
     product_range: 1,
     style_range: 1,
