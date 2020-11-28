@@ -1,0 +1,7 @@
+{
+  "user": "martinsung",
+  "host": "localhost",
+  "database": "inventory",
+  "password": "",
+  "port": 5432
+}

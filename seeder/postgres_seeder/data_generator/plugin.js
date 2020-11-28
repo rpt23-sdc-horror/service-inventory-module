@@ -2,7 +2,6 @@
 
 import csvWriter from "csv-write-stream";
 import fs from "fs";
-import short from "short-uuid";
 import status from "./helper";
 
 export default class CSVGenerator {
@@ -15,26 +14,19 @@ export default class CSVGenerator {
 
   async generateFile() {
     let ticker = 0;
-    let fileNumber = 1;
+    let fileNumber = 12;
 
     // Let developers know this method is running
     console.log(status.in_progress);
 
     for (let i = 0; i < this.productRange; i++) {
       const writer = csvWriter({ sendHeaders: false });
+      const stream = fs.createWriteStream(
+        `./seeder/postgres_seeder/data_generator/seed_data/mockData.csv`,
+        { flags: "a" }
+      );
       const sizes =
         (await this.coinFlip()) === 1 ? this.womenSizes : this.menSizes;
-
-      if (ticker >= 900000) {
-        fileNumber++;
-        ticker = 0;
-
-        console.log(fileNumber);
-      }
-
-      const stream = fs.createWriteStream(
-        `./seeder/postgres_seeder/data_generator/seed_data/mockData${fileNumber}.csv`
-      );
 
       writer.pipe(stream);
 
@@ -42,8 +34,8 @@ export default class CSVGenerator {
         for (let k = 0; k < sizes.length; k++) {
           const currentSize = sizes[k];
           const newQuantity = await this.generateQuantity();
-          const productID = short.generate();
-          const styleID = short.generate();
+          const productID = i + 1;
+          const styleID = j + 1;
           const document = {
             product_id: productID,
             style_id: styleID,
@@ -51,12 +43,14 @@ export default class CSVGenerator {
             quantity: newQuantity,
           };
 
-          !writer.write(document) ? writer.once("drain", writer.write(document)) : null;
-          ticker++;
+          !writer.write(document)
+            ? writer.once("drain", writer.write(document))
+            : null;
+          ticker += 1;
         }
       }
-      writer.end();
       stream.end();
+      writer.end();
     }
     return status.success;
   }
