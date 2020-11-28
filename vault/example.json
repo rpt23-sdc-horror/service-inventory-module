@@ -1,7 +1,7 @@
 {
-  "user": "martinsung",
-  "host": "localhost",
-  "database": "inventory",
-  "password": "",
+  "user": "Fill in",
+  "host": "Fill in",
+  "database": "Fill in",
+  "password": "Fill in",
   "port": 5432
 }
