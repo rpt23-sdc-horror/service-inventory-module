@@ -1,5 +1,3 @@
-"use strict";
-
 import csvWriter from "csv-write-stream";
 import fs from "fs";
 import status from "./helper";
