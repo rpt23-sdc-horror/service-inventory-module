@@ -20,7 +20,6 @@ class SizeGrid extends React.Component {
 
     this.getSizes(productId, styleId)
       .then((results) => {
-        console.log(results.data);
         this.setState({ sizes: results.data });
       })
       .catch((err) => {

@@ -49,7 +49,7 @@ describe("Server Routes Tests", function () {
         .expect("Content-type", /json/)
         .end(function (err, response) {
           if (err) return done(err);
-          expect(`${response.body.rows[0].product_id}`).to.equal("1");
+          expect(`${response.body[0].product_id}`).to.equal("1");
           done();
         });
     });
@@ -137,7 +137,7 @@ describe("Server Routes Tests", function () {
         .expect("Content-type", /json/)
         .end(function (err, response) {
           if (err) return done(err);
-          expect(`${response.body.rows[0].product_id}`).to.equal("1");
+          expect(`${response.body[0].product_id}`).to.equal("1");
           done();
         });
     });
@@ -206,7 +206,7 @@ describe("Server Routes Tests", function () {
         .expect("Content-type", /json/)
         .end(function (err, response) {
           if (err) return done(err);
-          expect(`${response.body.rows[0].product_id}`).to.equal("1");
+          expect(`${response.body[0].product_id}`).to.equal("1");
           done();
         });
     });
@@ -273,7 +273,7 @@ describe("Server Routes Tests", function () {
         .expect("Content-type", /json/)
         .end(function (err, response) {
           if (err) return done(err);
-          expect(`${response.body.rows[0].product_id}`).to.equal("1");
+          expect(`${response.body[0].product_id}`).to.equal("1");
           done();
         });
     });

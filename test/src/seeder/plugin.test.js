@@ -3,76 +3,52 @@ import { expect } from "chai";
 import CSVGenerator from "../../../seeder/postgres_seeder/data_generator/plugin";
 import csvWriter from "csv-write-stream";
 
-
-xdescribe("CSV Generator Test", function () {
-  const fakeConfig = {
+describe("Data Generator Tests", function () {
+  const csvGen = new CSVGenerator({
     product_range: 1,
     style_range: 1,
     women_sizes: [5],
     men_sizes: [6],
+  });
+
+  const generateRange = function (min, max) {
+    let result = [];
+
+    for (let i = min; i <= max; i++) {
+      result.push(i);
+    }
+
+    return result;
   };
-  const csvGenerator = new CSVGenerator(fakeConfig);
-  const writer = csvWriter();
 
-  describe("Generate File Method", function () {
-    beforeEach(function () {
-      sinon.restore();
-    });
+  before(function () {
+    sinon.restore();
+  });
 
-    afterEach(function () {
-      sinon.restore();
-    });
+  after(function () {
+    sinon.restore();
+  });
 
-    it("should call a write method", function (done) {
-      sinon.stub(writer, "write").callsFake(function () {
-        return;
+  describe("Plugins", function () {
+    describe("Quantity Generator", function () {
+      it("should generate a number between 0 and 100", async function (done) {
+        const range = generateRange(1, 100);
+        const result = csvGen.generateQuantity();
+
+        expect(range.indexOf(result)).to.not.equal(-1);
+        expect(typeof result).to.equal("number");
+        done();
       });
 
-      csvGenerator
-        .generateFile()
-        .then(function (response) {
-          expect(response).to.equal("Status: Success");
-        })
-        .catch(function (err) {
-          console.error(`Error: ${err}`);
-        })
-        .finally(function () {
+      describe("Coin Flip", function () {
+        it("should generate 1 or 0", function (done) {
+          const range = [0, 1];
+          const result = csvGen.coinFlip();
+
+          expect(range.indexOf(result)).to.not.equal(-1);
           done();
         });
-    });
-  });
-
-  describe("Coin Flip Method", function () {
-    before(function () {
-      sinon.restore();
-    });
-
-    after(function () {
-      sinon.restore();
-    });
-
-    it("should generate 1 or 0", async function () {
-      const response = await csvGenerator.coinFlip();
-      const options = [0, 1];
-      const result = options.indexOf(response);
-
-      expect(result).to.not.equal(-1);
-    });
-  });
-
-  describe("Generate Quantity Method", function () {
-    before(function () {
-      sinon.restore();
-    });
-
-    after(function () {
-      sinon.restore();
-    });
-
-    it("should generate a number", async function () {
-      const response = await csvGenerator.generateQuantity();
-
-      expect(typeof response).to.equal("number");
+      });
     });
   });
 });
