@@ -45,14 +45,10 @@ export default class CSVGenerator {
   }
 
   generateQuantity() {
-    const quantity = Math.floor(Math.random() * Math.floor(100));
-
-    return quantity;
+    return Math.floor(Math.random() * Math.floor(100));
   }
 
   coinFlip() {
-    const result = Math.floor(Math.random() * 2);
-
-    return result;
+    return Math.floor(Math.random() * 2);
   }
 }
