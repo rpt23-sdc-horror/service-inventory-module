@@ -1,7 +1,9 @@
 {
-  "user": "Fill in",
-  "host": "Fill in",
-  "database": "Fill in",
-  "password": "Fill in",
+  "user": "TO DO",
+  "host": "TO DO",
+  "database": "TO DO",
+  "password": "TO DO",
   "port": 5432
 }
+
+//Remove this line and change filename to dev.json

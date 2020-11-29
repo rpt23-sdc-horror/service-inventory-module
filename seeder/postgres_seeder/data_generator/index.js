@@ -8,14 +8,9 @@ csvGen
   .generateFile()
   .catch(function (err) {
     console.error(`Error: ${err}`);
-    return err;
+    console.log("Failed to generate a csv file :(");
+    return status.failure;
   })
-  .finally(function (err) {
-    if (err) {
-      console.log("Failed to generate a csv file :(");
-      return status.failure;
-    } else {
-      console.log("Successfully generated a csv file!");
-      return status.success;
-    }
+  .finally(function () {
+      console.log("Generator finished!");
   });

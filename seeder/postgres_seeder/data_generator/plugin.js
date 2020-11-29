@@ -13,55 +13,46 @@ export default class CSVGenerator {
   }
 
   async generateFile() {
-    let ticker = 0;
-    let fileNumber = 12;
+    const writer = csvWriter({ sendHeaders: false });
 
     // Let developers know this method is running
     console.log(status.in_progress);
 
-    for (let i = 0; i < this.productRange; i++) {
-      const writer = csvWriter({ sendHeaders: false });
-      const stream = fs.createWriteStream(
+    writer.pipe(
+      fs.createWriteStream(
         `./seeder/postgres_seeder/data_generator/seed_data/mockData.csv`,
-        { flags: "a" }
-      );
-      const sizes =
-        (await this.coinFlip()) === 1 ? this.womenSizes : this.menSizes;
+        { flags: "a+" }
+      )
+    );
 
-      writer.pipe(stream);
+    for (let i = this.productRange; i > 0; i--) {
+      const sizes = this.coinFlip() === 1 ? this.womenSizes : this.menSizes;
 
-      for (let j = 0; j < this.styleRange; j++) {
+      for (let j = this.styleRange; j > 0; j--) {
         for (let k = 0; k < sizes.length; k++) {
-          const currentSize = sizes[k];
-          const newQuantity = await this.generateQuantity();
-          const productID = i + 1;
-          const styleID = j + 1;
           const document = {
-            product_id: productID,
-            style_id: styleID,
-            size: currentSize,
-            quantity: newQuantity,
+            product_id: i,
+            style_id: j,
+            size: sizes[k],
+            quantity: this.generateQuantity(),
           };
 
-          !writer.write(document)
-            ? writer.once("drain", writer.write(document))
-            : null;
-          ticker += 1;
+          if (!writer.write(document))
+            await new Promise((resolve) => writer.once("drain", resolve));
         }
       }
-      stream.end();
-      writer.end();
     }
+    writer.end();
     return status.success;
   }
 
-  async generateQuantity() {
+  generateQuantity() {
     const quantity = Math.floor(Math.random() * Math.floor(100));
 
     return quantity;
   }
 
-  async coinFlip() {
+  coinFlip() {
     const result = Math.floor(Math.random() * 2);
 
     return result;

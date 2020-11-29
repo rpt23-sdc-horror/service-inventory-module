@@ -11,7 +11,7 @@
     "start": "babel-node -x \".js\" -r dotenv/config src/server/index.js",
     "server-dev": "babel-node -x \".js\" src/server/index.js",
     "test": "mocha test/**/*.test.js --require ./test/dom.js --require esm --require ignore-styles --require @babel/register ./test --exit || true",
-    "seed-postgres": "psql -U martinsung -d inventory -a -f ./seeder/postgres_seeder/seed.sql",
+    "seed-postgres": "psql -U TO_DO -d inventory -a -f ./seeder/postgres_seeder/seed.sql",
     "generate-data": "babel-node -x \".js\" ./seeder/postgres_seeder/data_generator/index.js",
     "react-dev": "webpack -d --watch",
     "build": "webpack --mode production"
