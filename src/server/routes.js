@@ -47,7 +47,7 @@ app.get("/inventory/:productID/:styleID", function (req, res) {
   controller
     .read(pID, sID)
     .then(function (result) {
-      res.send(result).status(200);
+      res.send(result.rows).status(200);
     })
     .catch(function (err) {
       console.error(`Error: ${err}`);
@@ -71,7 +71,7 @@ app.post("/inventory/product", function (req, res) {
   controller
     .write(document)
     .then(function (result) {
-      res.send(result).status(200);
+      res.send(result.rows).status(200);
     })
     .catch(function (err) {
       console.error(`Error: ${err}`);
@@ -93,7 +93,7 @@ app.patch("/inventory/product", function (req, res) {
   controller
     .updateQuantity(pID, sID, size, newQuantity)
     .then(function (result) {
-      res.send(result).status(200);
+      res.send(result.rows).status(200);
     })
     .catch(function (err) {
       console.error(`Error: ${err}`);
@@ -114,7 +114,7 @@ app.delete("/inventory/product", function (req, res) {
   controller
     .delete(pID, sID, size)
     .then(function (result) {
-      res.send(result).status(200);
+      res.send(result.rows).status(200);
     })
     .catch(function (err) {
       console.error(`Error: ${err}`);

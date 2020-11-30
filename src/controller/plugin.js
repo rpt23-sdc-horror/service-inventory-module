@@ -1,7 +1,10 @@
 import PostgresGateway from "../gateways/postgres/index";
+import Logger from "./logger";
 
-export default class Controller {
+export default class Controller extends Logger {
   constructor() {
+    super("Controller");
+
     this.gateway = new PostgresGateway();
   }
 
@@ -11,7 +14,7 @@ export default class Controller {
 
       return response;
     } catch (err) {
-      this.gateway.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
 
       throw err;
     }
@@ -23,7 +26,7 @@ export default class Controller {
 
       return response;
     } catch (err) {
-      this.gateway.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
 
       throw err;
     }
@@ -40,7 +43,7 @@ export default class Controller {
 
       return response;
     } catch (err) {
-      this.gateway.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
 
       throw err;
     }
@@ -48,15 +51,11 @@ export default class Controller {
 
   async delete(productID, styleID, size) {
     try {
-      const response = await this.gateway.delete(
-        productID,
-        styleID,
-        size
-      );
+      const response = await this.gateway.delete(productID, styleID, size);
 
       return response;
     } catch (err) {
-      this.gateway.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
 
       throw err;
     }

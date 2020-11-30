@@ -1,4 +1,5 @@
 node_modules
-bundle.js
 dev.json
 .env
+mockData.csv
+bundle.js
