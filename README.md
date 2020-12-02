@@ -17,18 +17,19 @@
 
 ## Usage
 
-> Install dependencies with npm i
-> Create schema according to database
-> Run seeder script with npm run seed
-> Build webpack with npm run build
-> Run server with npm run start
+- Install dependencies with npm i
+- Seed Database (see Seed Database section)
+- Build webpack with npm run build
+- Run server with npm run start
 
 ## Seed Database
 
-> Open package.json & modify seed-postgres script: Replace TO_DO with postgres username
-> Run data generator with npm run generate-data
-> Locate seed.sql in postgres_seeder & modify TO_DO filepath: Replace TO_DO with absolute path to mockData.csv in seed_data
-> Run seeder with npm run seed-postgres
+- Open package.json and modify "seed-postgres" & "create-postgres-database" : Replace TO_DO with postgres username
+- npm run create-postgres-database
+- npm run generate-data
+- Locate seed.sql in postgres_seeder & modify TO_DO filepath
+- npm run seed-postgres
+
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).

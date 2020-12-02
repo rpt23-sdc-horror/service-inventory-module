@@ -11,14 +11,16 @@ export default class CSVGenerator {
   }
 
   async generateFile() {
-    const writer = csvWriter({ sendHeaders: false });
+    const writer = csvWriter({
+      headers: ["product_id", "style_id", "size", "quantity"],
+    });
 
     // Let developers know this method is running
     console.log(status.in_progress);
 
     writer.pipe(
       fs.createWriteStream(
-        `./seeder/postgres_seeder/data_generator/seed_data/mockData.csv`,
+        "./seeder/seed_data/mockData.csv",
         { flags: "a+" }
       )
     );

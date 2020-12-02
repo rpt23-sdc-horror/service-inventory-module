@@ -1,7 +1,6 @@
 import sinon from "sinon";
 import { expect } from "chai";
 import CSVGenerator from "../../../seeder/postgres_seeder/data_generator/plugin";
-import csvWriter from "csv-write-stream";
 
 describe("Data Generator Tests", function () {
   const csvGen = new CSVGenerator({
