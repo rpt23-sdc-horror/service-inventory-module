@@ -30,6 +30,12 @@
 - Locate seed.sql in postgres_seeder & modify TO_DO filepath
 - npm run seed-postgres
 
+## Seed Database
+
+> Open package.json & modify seed-postgres script: Replace TO_DO with postgres username
+> Run data generator with npm run generate-data
+> Locate seed.sql in postgres_seeder & modify TO_DO filepath: Replace TO_DO with absolute path to mockData.csv in seed_data
+> Run seeder with npm run seed-postgres
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
