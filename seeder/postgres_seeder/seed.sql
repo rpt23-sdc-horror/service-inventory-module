@@ -5,3 +5,5 @@ FROM 'ABSOLUTE PATH TO YOUR mockData.csv'
 DELIMITER ','
 
 CSV HEADER;
+
+CREATE INDEX product_index ON products (product_id, style_id);
