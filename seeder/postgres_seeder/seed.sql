@@ -1,6 +1,6 @@
 COPY products(product_id, style_id, size, quantity)
 
-FROM '/Users/martinsung/Desktop/service-inventory-module/seeder/postgres_seeder/data_generator/seed_data/mockData.csv'
+FROM 'ABSOLUTE PATH TO YOUR mockData.csv'
 
 DELIMITER ','
 
