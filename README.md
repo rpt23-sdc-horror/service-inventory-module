@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@
 
 ## Seed Database
 
-- Open package.json and modify "seed-postgres" & "create-postgres-database" : Replace TO_DO with postgres username
+- Open package.json and modify "seed-postgres" & "create-postgres-database" scripts : Replace TO_DO with postgres username
 - npm run create-postgres-database
 - npm run generate-data
 - Locate seed.sql in postgres_seeder & modify TO_DO filepath
@@ -40,6 +40,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ## Development
 
 ### CRUD
+
 - Create: POST /inventory/product
 - Read: GET /inventory/:productID/:styleID
 - Update: PATCH /inventory/product
