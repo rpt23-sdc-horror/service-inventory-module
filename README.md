@@ -24,7 +24,7 @@
 
 ## Seed Database
 
-- Open package.json and modify "seed-postgres" & "create-postgres-database" scripts : Replace TO_DO with postgres username
+- Open package.json and modify "seed-postgres" & "create-postgres-database" scripts: Replace TO_DO with postgres username
 - npm run create-postgres-database
 - npm run generate-data
 - Locate seed.sql in postgres_seeder & modify TO_DO filepath
