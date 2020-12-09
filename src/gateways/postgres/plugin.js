@@ -1,3 +1,5 @@
+"use strict"
+
 import Gateway from "../index";
 import { Pool } from "pg";
 import VAULT from "../../../vault/dev.json";

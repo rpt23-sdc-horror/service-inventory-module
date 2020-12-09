@@ -1,3 +1,5 @@
+"use strict"
+
 const status = {
   success: "Status: Success",
   failure: "Status: Failed",

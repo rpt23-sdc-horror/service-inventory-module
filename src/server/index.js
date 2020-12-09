@@ -1,3 +1,5 @@
+"use strict"
+
 import app from "./routes";
 
 const port = process.env.PORT || 3004;

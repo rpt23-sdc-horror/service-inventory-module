@@ -1,3 +1,5 @@
+"use strict"
+
 import winston from "winston";
 
 export default class Logger {

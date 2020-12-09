@@ -1,3 +1,5 @@
+"use strict"
+
 import express from "express";
 import Controller from "../controller/index";
 import cors from "cors";
