@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import PostgresGateway from "../gateways/postgres/index";
 import Logger from "./logger";

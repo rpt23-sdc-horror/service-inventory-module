@@ -1,8 +1,8 @@
-"use strict"
+"use strict";
 
 import CSVGenerator from "./plugin";
 import config from "./config.js";
-import status from "./helper";
+import status from "./utils";
 
 const csvGen = new CSVGenerator(config);
 
@@ -14,5 +14,5 @@ csvGen
     return status.failure;
   })
   .finally(function () {
-      console.log("Generator finished!");
+    console.log("Generator finished!");
   });

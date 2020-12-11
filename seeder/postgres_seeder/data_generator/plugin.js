@@ -1,8 +1,8 @@
-"use strict"
+"use strict";
 
 import csvWriter from "csv-write-stream";
 import fs from "fs";
-import status from "./helper";
+import status from "./utils";
 
 export default class CSVGenerator {
   constructor(config) {
@@ -21,10 +21,7 @@ export default class CSVGenerator {
     console.log(status.in_progress);
 
     writer.pipe(
-      fs.createWriteStream(
-        "./seeder/seed_data/mockData.csv",
-        { flags: "a+" }
-      )
+      fs.createWriteStream("./seeder/seed_data/mockData.csv", { flags: "a+" })
     );
 
     for (let i = this.productRange; i > 0; i--) {
