@@ -6,4 +6,4 @@
   "port": 5432
 }
 
-//Remove this line and change filename to dev.json
+// Change file name to dev.json and delete this comment

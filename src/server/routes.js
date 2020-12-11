@@ -1,4 +1,7 @@
-"use strict"
+"use strict";
+
+// Require New Relic
+require("newrelic");
 
 import express from "express";
 import Controller from "../controller/index";

@@ -1,5 +1,13 @@
-node_modules
+## files
+keys.json
 dev.json
-.env
 mockData.csv
+
+## dependencies
+node_modules
+
+## misc
+newrelic_agent.log
 bundle.js
+.DS_Store
+.env
