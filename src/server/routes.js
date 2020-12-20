@@ -1,6 +1,5 @@
 "use strict";
 
-// Require New Relic
 require("newrelic");
 
 import express from "express";

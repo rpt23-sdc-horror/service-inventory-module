@@ -26,5 +26,5 @@ export default function () {
     ],
   ]);
 
-  sleep(1);
+  sleep(2);
 }

@@ -16,6 +16,7 @@
     "seed-mongo": "mongoimport --type csv -d inventory -c Products --headerline --drop ./seeder/seed_data/mockData.csv",
     "generate-data": "babel-node -x \".js\" ./seeder/postgres_seeder/data_generator/index.js",
     "react-dev": "webpack -d --watch",
+    "load-test": "k6 run ./test/k6-test/k6-test-script.js",
     "build": "webpack --mode production"
   },
   "dependencies": {
