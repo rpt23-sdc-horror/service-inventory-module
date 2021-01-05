@@ -1,14 +1,14 @@
 "use strict";
 
-require("newrelic");
-
 import express from "express";
 import Controller from "../controller/index";
 import cors from "cors";
+import Logger from "./winston";
 
 const app = express();
 
 const controller = new Controller();
+const winstonLogger = new Logger("routes");
 
 app.use(
   cors({
@@ -29,14 +29,9 @@ app.get("/inventory/product", (req, res) => {
   return;
 });
 
-app.get("/inventory/:productID/:styleID", function (req, res) {
+app.get("/inventory/:productID/:styleID", async function (req, res) {
   const pID = req.params.productID;
   const sID = req.params.styleID;
-
-  /*
-  To prevent bad requests, such as null in lieu of an actual product ID,
-  this endpoint is set to recognize null and undefined as params, and reject them.
-  */
 
   if (
     pID == "null" ||
@@ -50,11 +45,11 @@ app.get("/inventory/:productID/:styleID", function (req, res) {
 
   controller
     .read(pID, sID)
-    .then(function (result) {
+    .then(async function (result) {
       res.send(result.rows).status(200);
     })
     .catch(function (err) {
-      console.error(`Error: ${err}`);
+      winstonLogger.logger.log("error", "Error:", err);
       res.sendStatus(500);
     });
 });
@@ -78,7 +73,7 @@ app.post("/inventory/product", function (req, res) {
       res.send(result.rows).status(200);
     })
     .catch(function (err) {
-      console.error(`Error: ${err}`);
+      winstonLogger.logger.log("error", "Error:", err);
       res.sendStatus(500);
     });
 });
@@ -100,7 +95,7 @@ app.patch("/inventory/product", function (req, res) {
       res.send(result.rows).status(200);
     })
     .catch(function (err) {
-      console.error(`Error: ${err}`);
+      winstonLogger.logger.log("error", "Error:", err);
       res.sendStatus(500);
     });
 });
@@ -121,7 +116,7 @@ app.delete("/inventory/product", function (req, res) {
       res.send(result.rows).status(200);
     })
     .catch(function (err) {
-      console.error(`Error: ${err}`);
+      winstonLogger.logger.log("error", "Error:", err);
       res.sendStatus(500);
     });
 });

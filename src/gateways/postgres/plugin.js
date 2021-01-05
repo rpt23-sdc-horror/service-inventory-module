@@ -40,7 +40,7 @@ export default class PostgresGateway extends Gateway {
       return response;
     } catch (err) {
       // Use winston to record errors. "Error:" will log "Error: [error message]"
-      await this.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -66,7 +66,7 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      await this.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -96,7 +96,7 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      await this.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;
@@ -121,7 +121,7 @@ export default class PostgresGateway extends Gateway {
 
       return response;
     } catch (err) {
-      await this.logger.log("error", "Error:", err);
+      this.logger.log("error", "Error:", err);
       await client.query("ROLLBACK");
 
       throw err;

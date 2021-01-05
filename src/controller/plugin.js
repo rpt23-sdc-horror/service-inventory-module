@@ -1,7 +1,7 @@
 "use strict";
 
 import PostgresGateway from "../gateways/postgres/index";
-import Logger from "./logger";
+import Logger from "./winston";
 
 export default class Controller extends Logger {
   constructor() {

@@ -3,8 +3,10 @@ import request from "supertest";
 import sinon from "sinon";
 import Controller from "../../../src/controller/index";
 import { expect } from "chai";
+import Logger from "../../../src/server/winston";
 
 describe("Server Routes Tests", function () {
+  const winstonLogger = new Logger("test");
   const error = new Error("Fake Error");
   const body = {
     product_id: 2,
@@ -23,8 +25,9 @@ describe("Server Routes Tests", function () {
       sinon.restore();
     });
 
-    afterEach(function () {
+    afterEach(function (done) {
       sinon.restore();
+      done();
     });
 
     it("should return a 200 OK status for proper requests", function (done) {
@@ -54,6 +57,24 @@ describe("Server Routes Tests", function () {
         });
     });
 
+    it("should return 500 Internal Error status and log the error with Winston if the controller method fails", function (done) {
+      const spy = sinon.spy(winstonLogger.logger, "log");
+
+      sinon.stub(Controller.prototype, "read").throws(error);
+
+      request(app)
+        .get(`/inventory/${1}/${2}`)
+        .expect(500)
+        .end(function (err) {
+          if (err) {
+            expect(spy).calledOnce();
+            return done(err);
+          }
+
+          done();
+        });
+    });
+
     it("should return 404 status if either or both parameters are null", function (done) {
       request(app)
         .get(`/inventory/${null}/${null}`)
@@ -65,18 +86,6 @@ describe("Server Routes Tests", function () {
       request(app)
         .get(`/inventory/${undefined}/${undefined}`)
         .expect(400)
-        .end(function (err) {
-          if (err) return done(err);
-          done();
-        });
-    });
-
-    it("should return 500 Internal Error status and log the error with Winston if the controller method fails", function (done) {
-      sinon.stub(Controller.prototype, "read").throws(error);
-
-      request(app)
-        .get(`/inventory/${1}/${2}`)
-        .expect(500)
         .end(function (err) {
           if (err) return done(err);
           done();
@@ -156,6 +165,8 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return 500 Internal Error status and log the error with Winston if the controller method fails", function (done) {
+      const spy = sinon.spy(winstonLogger.logger, "log");
+
       sinon.stub(Controller.prototype, "write").throws(error);
 
       request(app)
@@ -165,7 +176,11 @@ describe("Server Routes Tests", function () {
         .type("json")
         .expect(500)
         .end(function (err) {
-          if (err) return done(err);
+          if (err) {
+            expect(spy).calledOnce();
+            return done(err);
+          }
+
           done();
         });
     });
@@ -225,6 +240,8 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return 500 Internal Error status and log the error with Winston if the controller method fails", function (done) {
+      const spy = sinon.spy(winstonLogger.logger, "log");
+
       sinon.stub(Controller.prototype, "updateQuantity").throws(error);
 
       request(app)
@@ -234,7 +251,11 @@ describe("Server Routes Tests", function () {
         .type("json")
         .expect(500)
         .end(function (err) {
-          if (err) return done(err);
+          if (err) {
+            expect(spy).calledOnce();
+            return done(err);
+          }
+
           done();
         });
     });
@@ -292,6 +313,8 @@ describe("Server Routes Tests", function () {
     });
 
     it("should return 500 Internal Error status and log the error with Winston if the controller method fails", function (done) {
+      const spy = sinon.spy(winstonLogger.logger, "log");
+
       sinon.stub(Controller.prototype, "delete").throws(error);
 
       request(app)
@@ -301,7 +324,11 @@ describe("Server Routes Tests", function () {
         .type("json")
         .expect(500)
         .end(function (err) {
-          if (err) return done(err);
+          if (err) {
+            expect(spy).calledOnce();
+            return done(err);
+          }
+
           done();
         });
     });
