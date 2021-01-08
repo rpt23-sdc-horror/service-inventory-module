@@ -2,6 +2,7 @@ import app from "../../../src/server/routes";
 import request from "supertest";
 import sinon from "sinon";
 import Controller from "../../../src/controller/index";
+import MemoryCache from "../../../src/middleware/memcached/plugin";
 import { expect } from "chai";
 import Logger from "../../../src/server/winston";
 
@@ -136,6 +137,7 @@ describe("Server Routes Tests", function () {
 
         return result;
       });
+      sinon.stub(MemoryCache.prototype, "remove").resolves(true);
 
       request(app)
         .post("/inventory/product")

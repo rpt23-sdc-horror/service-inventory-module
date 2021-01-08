@@ -4,11 +4,13 @@ import express from "express";
 import Controller from "../controller/index";
 import cors from "cors";
 import Logger from "./winston";
+import MemoryCache from "../middleware/memcached/index";
 
 const app = express();
 
 const controller = new Controller();
 const winstonLogger = new Logger("routes");
+const cache = new MemoryCache();
 
 app.use(
   cors({
@@ -58,10 +60,10 @@ app.post("/inventory/product", function (req, res) {
   const document = req.body;
 
   if (
-    !document.product_id ||
-    !document.style_id ||
-    !document.size ||
-    !document.quantity
+    document.product_id === undefined ||
+    document.style_id === undefined ||
+    document.size === undefined ||
+    document.quantity === undefined
   ) {
     res.sendStatus(400);
     return;
@@ -69,7 +71,11 @@ app.post("/inventory/product", function (req, res) {
 
   controller
     .write(document)
-    .then(function (result) {
+    .then(async function (result) {
+      const key = `/inventory/${document.product_id}/${document.style_id}`
+
+      // Remove existing key to prevent cache from sending in an old version after a post request
+      await cache.remove(key);
       res.send(result.rows).status(200);
     })
     .catch(function (err) {
