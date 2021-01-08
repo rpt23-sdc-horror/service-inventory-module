@@ -13,19 +13,13 @@ export default class MemoryCache {
     const cache = this.cache;
 
     return new Promise(function (resolve, reject) {
-      const result = cache.get(key);
-
-      if (!result || !result.length) {
-        resolve("No existing key");
-      } else {
-        cache.del(key, function (err) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(true);
-          }
-        });
-      }
+      cache.del(key, function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
+        }
+      });
     });
   }
 }
