@@ -72,7 +72,7 @@ app.post("/inventory/product", function (req, res) {
   controller
     .write(document)
     .then(async function (result) {
-      const key = `/inventory/${document.product_id}/${document.style_id}`
+      const key = `/inventory/${document.product_id}/${document.style_id}`;
 
       // Remove existing key to prevent cache from sending in an old version after a post request
       await cache.remove(key);
@@ -90,7 +90,12 @@ app.patch("/inventory/product", function (req, res) {
   const size = req.body.size;
   const newQuantity = req.body.newQuantity;
 
-  if (!pID || !sID || !size || !newQuantity) {
+  if (
+    pID === undefined ||
+    sID === undefined ||
+    size === undefined ||
+    newQuantity === undefined
+  ) {
     res.sendStatus(400);
     return;
   }
@@ -111,7 +116,7 @@ app.delete("/inventory/product", function (req, res) {
   const sID = req.body.style_id;
   const size = req.body.size;
 
-  if (!pID || !sID || !size) {
+  if (pID === undefined || sID === undefined || size === undefined) {
     res.sendStatus(400);
     return;
   }
