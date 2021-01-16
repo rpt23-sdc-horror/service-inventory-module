@@ -28,7 +28,6 @@
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "memcached": "^2.2.2",
-    "memcached-promise": "^1.0.1",
     "mongoose": "^5.10.7",
     "newrelic": "^7.0.2",
     "pg": "^8.4.1",
